@@ -96,7 +96,6 @@ const Dashboard = () => {
                       <div className="text-center">
                         <h2 className="text-3xl font-bold text-white tracking-tight">Welcome back</h2>
                         <div className="flex items-center gap-2 justify-center mt-1">
-                          <span className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></span>
                           <p className="text-ossium-muted text-sm font-medium">{user.email}</p>
                         </div>
                       </div>
@@ -109,7 +108,6 @@ const Dashboard = () => {
                         <div className="bg-[#1A1A1A] border border-white/5 rounded-xl p-5 group">
                           <div className="flex items-start justify-between mb-2">
                             <p className="text-ossium-muted text-[10px] font-bold uppercase tracking-wider">Access</p>
-                            <FiZap className="text-ossium-accent" />
                           </div>
                           <p className="text-xl font-bold text-white leading-tight">Unlimited</p>
                           <p className="text-[10px] text-ossium-muted mt-1">CodeRef is 100% Free</p>
@@ -119,7 +117,6 @@ const Dashboard = () => {
                         <div className="bg-[#1A1A1A] border border-white/5 rounded-xl p-5 group">
                           <div className="flex items-start justify-between mb-2">
                             <p className="text-ossium-muted text-[10px] font-bold uppercase tracking-wider">Last Seen</p>
-                            <FiClock className="text-blue-400" />
                           </div>
                           <p className="text-xl font-bold text-white leading-tight">{new Date(user.last_sign_in_at).toLocaleDateString()}</p>
                           <p className="text-[10px] text-ossium-muted mt-1">{new Date(user.last_sign_in_at).toLocaleTimeString()}</p>
@@ -134,9 +131,6 @@ const Dashboard = () => {
                             <div className="bg-black/40 border border-white/5 rounded px-3 py-1.5 overflow-hidden">
                               <p className="font-mono text-[11px] text-white/50 truncate select-all">{user.id}</p>
                             </div>
-                          </div>
-                          <div className="flex-shrink-0">
-                            <FiShield className="text-purple-400 text-xl" />
                           </div>
                         </div>
                       </div>
