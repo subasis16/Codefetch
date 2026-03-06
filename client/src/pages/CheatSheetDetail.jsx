@@ -157,21 +157,32 @@ const CheatSheetDetail = () => {
     },
     express: {
       title: "Express.js Cheat Sheet",
-      desc: "Fast, unopinionated, minimalist web framework for Node.js.",
+      desc: "Node.js web framework for building APIs and web applications.",
       version: "v5.0",
       sections: [
         {
-          title: "Setup",
+          title: "Basic Routing",
           items: [
-            { label: "Install", code: "npm install express" },
-            { label: "Hello World", code: "const express = require('express')\nconst app = express()\n\napp.get('/', function (req, res) {\n  res.send('Hello World')\n})\n\napp.listen(3000)" }
+            { label: "Init", code: "const express = require('express')\nconst app = express()" },
+            { label: "GET/POST", code: "app.get('/', (req, res) => res.send('GET'))\napp.post('/', (req, res) => res.json({ ok: true }))" },
+            { label: "Route Params", code: "app.get('/user/:id', (req, res) => {\n  const id = req.params.id\n})" }
           ]
         },
         {
-          title: "Routing",
+          title: "Middleware",
           items: [
-            { label: "Basic Routing", code: "app.METHOD(PATH, HANDLER)" },
-            { label: "Route Parameters", code: "app.get('/users/:userId/books/:bookId', (req, res) => {\n  res.send(req.params)\n})" }
+            { label: "Application Level", code: "app.use((req, res, next) => {\n  console.log('Time:', Date.now())\n  next()\n})" },
+            { label: "Built-in", code: "app.use(express.json())\napp.use(express.static('public'))" },
+            { label: "Error Handling", code: "app.use((err, req, res, next) => {\n  console.error(err.stack)\n  res.status(500).send('Error!')\n})" }
+          ]
+        },
+        {
+          title: "Response Methods",
+          items: [
+            { label: "res.send()", code: "res.send('HTML or Text')" },
+            { label: "res.json()", code: "res.json({ user: 'tobi' })" },
+            { label: "res.redirect()", code: "res.redirect('/login')" },
+            { label: "res.status()", code: "res.status(404).end()" }
           ]
         }
       ]
@@ -219,46 +230,75 @@ const CheatSheetDetail = () => {
     },
     docker: {
       title: "Docker Cheat Sheet",
-      desc: "Common Docker CLI commands and usage.",
-      version: "v24",
+      desc: "Containerization platform for developing and running applications.",
+      version: "v24+",
       sections: [
         {
-          title: "Images",
+          title: "Running Containers",
           items: [
-            { label: "List Images", code: "docker images" },
-            { label: "Build Image", code: "docker build -t my-app ." },
-            { label: "Pull Image", code: "docker pull ubuntu" }
+            { label: "Run", code: "docker run -d --name my-app -p 8080:80 nginx" },
+            { label: "Stop & Start", code: "docker stop my-app\ndocker start my-app" },
+            { label: "Exec", code: "docker exec -it my-app /bin/bash" },
+            { label: "Logs", code: "docker logs -f my-app" }
           ]
         },
         {
-          title: "Containers",
+          title: "Images",
           items: [
-            { label: "Run Container", code: "docker run -d -p 80:80 my-app" },
-            { label: "List Containers", code: "docker ps -a" },
-            { label: "Stop Container", code: "docker stop <container_id>" },
-            { label: "Remove Container", code: "docker rm <container_id>" }
+            { label: "Build", code: "docker build -t app:v1 ." },
+            { label: "List & Prune", code: "docker images\ndocker image prune" },
+            { label: "Push", code: "docker push registry.com/app:v1" }
+          ]
+        },
+        {
+          title: "Dockerfile Instructions",
+          items: [
+            { label: "FROM & RUN", code: "FROM node:20\nRUN npm install" },
+            { label: "COPY & ADD", code: "COPY . /app\nADD project.tar.gz /data" },
+            { label: "CMD & ENTRYPOINT", code: "CMD [\"node\", \"server.js\"]\nENTRYPOINT [\"python\"]" }
+          ]
+        },
+        {
+          title: "Cleanup",
+          items: [
+            { label: "Remove", code: "docker rm -f container_id\ndocker rmi image_id" },
+            { label: "Prune All", code: "docker system prune -a --volumes" }
           ]
         }
       ]
     },
     typescript: {
       title: "TypeScript Cheat Sheet",
-      desc: "Static types for JavaScript.",
+      desc: "Static types, Interfaces, Generics, and Utility types for JavaScript scalability.",
       version: "v5.3",
       sections: [
         {
           title: "Basic Types",
           items: [
-            { label: "Primitives", code: "let isDone: boolean = false;\nlet lines: number = 42;\nlet name: string = 'Anders';" },
-            { label: "Arrays", code: "let list: number[] = [1, 2, 3];" },
-            { label: "Any", code: "let notSure: any = 4;" }
+            { label: "Primitives", code: "let isDone: boolean = false\nlet count: number = 42\nlet name: string = 'John'\nlet list: number[] = [1, 2, 3]\nlet tuple: [string, number] = ['hello', 10]" },
+            { label: "Enums", code: "enum Color { Red, Green, Blue }\nlet c: Color = Color.Green" },
+            { label: "Union & Intersection", code: "type ID = string | number\ntype Admin = User & { permissions: string[] }" }
           ]
         },
         {
-          title: "Interfaces",
+          title: "Interfaces & Types",
           items: [
-            { label: "Define Interface", code: "interface User {\n  name: string;\n  id: number;\n}" },
-            { label: "Optional Prop", code: "interface User {\n  age?: number;\n}" }
+            { label: "Interface", code: "interface User {\n  readonly id: number\n  name: string\n  age?: number // optional\n}" },
+            { label: "Function Type", code: "interface SearchFunc {\n  (source: string, sub: string): boolean\n}" },
+            { label: "Type Alias", code: "type Point = { x: number; y: number }" }
+          ]
+        },
+        {
+          title: "Generics",
+          items: [
+            { label: "Generic Function", code: "function identity<T>(arg: T): T {\n  return arg\n}" },
+            { label: "Generic Interface", code: "interface Box<T> {\n  value: T\n}" }
+          ]
+        },
+        {
+          title: "Utility Types",
+          items: [
+            { label: "Common Utilities", code: "Partial<User> // all props optional\nReadonly<User> // all props readonly\nPick<User, 'name' | 'age'>\nOmit<User, 'id'>" }
           ]
         }
       ]
@@ -288,471 +328,1087 @@ const CheatSheetDetail = () => {
       ]
     },
     bash: {
-      title: "Bash Cheat Sheet",
-      desc: "Unix shell and command language.",
+      title: "Bash Scripting Cheat Sheet",
+      desc: "Unix shell commands, scripting syntax, and automation utilities.",
       version: "v5",
       sections: [
         {
-          title: "File Operations",
+          title: "Variables & IO",
           items: [
-            { label: "List Files", code: "ls -la" },
-            { label: "Copy", code: "cp source dest" },
-            { label: "Move", code: "mv source dest" },
-            { label: "Delete", code: "rm -rf folder" }
+            { label: "Variables", code: "NAME=\"John\"\necho $NAME\necho \"Hello ${NAME}\" // interpolation" },
+            { label: "User Input", code: "read -p \"Enter name: \" USERNAME" },
+            { label: "Arguments", code: "$0 // script name\n$1, $2 // positional args\n$# // number of args" }
           ]
         },
         {
-          title: "Navigation",
+          title: "Control Flow",
           items: [
-            { label: "Print Working Directory", code: "pwd" },
-            { label: "Change Directory", code: "cd /path/to/dir" }
+            { label: "If Statement", code: "if [ \"$1\" == \"admin\" ]; then\n  echo \"Hi Admin\"\nelif [ \"$1\" == \"user\" ]; then\n  echo \"Hi User\"\nelse\n  echo \"Who are you?\"\nfi" },
+            { label: "Loops", code: "for I in 1 2 3; do echo $I; done\nwhile [ $COUNT -lt 10 ]; do ((COUNT++)); done" }
+          ]
+        },
+        {
+          title: "Logic & Comparisons",
+          items: [
+            { label: "String Test", code: "-z $VAR // empty\n-n $VAR // not empty\n$V1 == $V2 // equal" },
+            { label: "File Test", code: "-e $FILE // exists\n-d $DIR // is directory\n-f $FILE // is regular file" }
+          ]
+        },
+        {
+          title: "Pipes & Redirects",
+          items: [
+            { label: "Redirect", code: "ls > files.txt // overwrite\nls >> files.txt // append\n2> error.log // redirect stderr" },
+            { label: "Pipe", code: "cat file.txt | grep \"error\" | wc -l" }
           ]
         }
       ]
     },
     vim: {
       title: "Vim Cheat Sheet",
-      desc: "Highly configurable text editor built to make creating and changing any kind of text very efficient.",
-      version: "9.0",
+      desc: "The ubiquitous text editor reference for efficiency and speed.",
+      version: "v9.0",
       sections: [
         {
-          title: "Modes",
+          title: "Modes & Basics",
           items: [
-            { label: "Normal Mode", code: "Esc" },
-            { label: "Insert Mode", code: "i" },
-            { label: "Visual Mode", code: "v" },
-            { label: "Command Mode", code: ":" }
+            { label: "Normal Mode", code: "<Esc>" },
+            { label: "Insert Mode", code: "i (before), a (after), o (new line below)" },
+            { label: "Command Mode", code: ":" },
+            { label: "Visual Mode", code: "v (char), V (line), Ctrl+v (block)" }
           ]
         },
         {
           title: "Navigation",
           items: [
-            { label: "Left", code: "h" },
-            { label: "Down", code: "j" },
-            { label: "Up", code: "k" },
-            { label: "Right", code: "l" },
-            { label: "Start of file", code: "gg" },
-            { label: "End of file", code: "G" }
+            { label: "Basic", code: "h (left), j (down), k (up), l (right)" },
+            { label: "Words", code: "w (next word), b (prev word), e (end of word)" },
+            { label: "Document", code: "gg (start), G (end), :num (go to line)" }
           ]
         },
         {
           title: "Editing",
           items: [
-            { label: "Undo", code: "u" },
-            { label: "Redo", code: "Ctrl + r" },
-            { label: "Copy Line", code: "yy" },
-            { label: "Paste", code: "p" }
+            { label: "Copy/Paste", code: "yy (yank line), p (paste), P (paste before)" },
+            { label: "Delete", code: "x (char), dd (line), dw (word)" },
+            { label: "Undo/Redo", code: "u (undo), Ctrl+r (redo)" },
+            { label: "Search", code: "/pattern (forward), ?pattern (backward), n (next)" }
+          ]
+        },
+        {
+          title: "Saving & Quitting",
+          items: [
+            { label: "Commands", code: ":w (save), :q (quit), :wq (save & quit), :q! (force quit)" }
           ]
         }
       ]
     },
     sql: {
       title: "SQL Cheat Sheet",
-      desc: "Domain-specific language used in programming and designed for managing data held in a relational database management system.",
-      version: "Std",
+      desc: "Relational database queries, data manipulation, and schema definition.",
+      version: "Standard",
       sections: [
         {
-          title: "Queries",
+          title: "Queries (DQL)",
           items: [
-            { label: "Select All", code: "SELECT * FROM table_name;" },
-            { label: "Start With", code: "SELECT * FROM Customers\nWHERE City LIKE 'a%';" }
+            { label: "Select", code: "SELECT column1, column2 FROM users\nWHERE status = 'active'\nORDER BY created_at DESC\nLIMIT 10;" },
+            { label: "Joins", code: "SELECT u.name, p.title\nFROM users u\nJOIN posts p ON u.id = p.user_id;" },
+            { label: "Aggregates", code: "SELECT category, COUNT(*) FROM products\nGROUP BY category\nHAVING COUNT(*) > 5;" }
           ]
         },
         {
-          title: "Manipulation",
+          title: "Manipulation (DML)",
           items: [
-            { label: "Insert", code: "INSERT INTO table_name (column1, column2)\nVALUES (value1, value2);" },
-            { label: "Update", code: "UPDATE table_name\nSET column1 = value1\nWHERE condition;" },
-            { label: "Delete", code: "DELETE FROM table_name WHERE condition;" }
+            { label: "Insert", code: "INSERT INTO users (name, email) VALUES ('John', 'j@ex.com');" },
+            { label: "Update", code: "UPDATE users SET status = 'banned' WHERE id = 12;" },
+            { label: "Delete", code: "DELETE FROM users WHERE last_login < '2023-01-01';" }
+          ]
+        },
+        {
+          title: "Definition (DDL)",
+          items: [
+            { label: "Create Table", code: "CREATE TABLE users (\n  id SERIAL PRIMARY KEY,\n  username VARCHAR(50) UNIQUE,\n  email VARCHAR(255) NOT NULL\n);" },
+            { label: "Alter Table", code: "ALTER TABLE users ADD COLUMN age INT;" }
           ]
         }
       ]
     },
     regex: {
       title: "Regex Cheat Sheet",
-      desc: "Sequence of characters that specify a search pattern.",
-      version: "PCRE",
+      desc: "Regular expression syntax for pattern matching and string manipulation.",
+      version: "Global",
       sections: [
         {
-          title: "Anchors",
+          title: "Meta-characters",
           items: [
-            { label: "Start of String", code: "^" },
-            { label: "End of string", code: "$" },
-            { label: "Word boundary", code: "\\b" }
+            { label: "Basics", code: ". (any), \\d (digit), \\D (not digit)\n\\w (word), \\W (not word), \\s (space), \\S (not space)" },
+            { label: "Anchors", code: "^ (start), $ (end), \\b (word boundary)" }
           ]
         },
         {
           title: "Quantifiers",
           items: [
-            { label: "Zero or more", code: "*" },
-            { label: "One or more", code: "+" },
-            { label: "Zero or one", code: "?" },
-            { label: "n times", code: "{3}" }
+            { label: "Counts", code: "* (0+), + (1+), ? (0 or 1)\n{n} (exactly n), {n,} (n+), {n,m} (between n & m)" }
           ]
         },
         {
-          title: "Character Classes",
+          title: "Groups & Sets",
           items: [
-            { label: "Digit", code: "\\d" },
-            { label: "Word character", code: "\\w" },
-            { label: "Whitespace", code: "\\s" },
-            { label: "Any character", code: "." }
+            { label: "Sets", code: "[abc] (any of), [^abc] (none of), [a-z] (range)" },
+            { label: "Groups", code: "(abc) (group), (a|b) (a or b), (?:...) (non-capturing)" }
+          ]
+        },
+        {
+          title: "Lookaround",
+          items: [
+            { label: "Positive", code: "(?=...) (lookahead), (?<=...) (lookbehind)" },
+            { label: "Negative", code: "(?!...) (lookahead), (?<!...) (lookbehind)" }
           ]
         }
       ]
     },
     java: {
       title: "Java Cheat Sheet",
-      desc: "Object-oriented programming language.",
-      version: "21",
+      desc: "JVM-based object-oriented programming language for enterprise apps.",
+      version: "Java 21",
       sections: [
         {
           title: "Basics",
           items: [
-            { label: "Main Method", code: "public static void main(String[] args) {\n  System.out.println(\"Hello\");\n}" },
-            { label: "Variables", code: "int x = 5;\nString name = \"Java\";" },
-            { label: "Loop", code: "for (int i = 0; i < 5; i++) {\n  System.out.println(i);\n}" }
+            { label: "Standard Class", code: "public class Main {\n  public static void main(String[] args) {\n    System.out.println(\"Hello\");\n  }\n}" },
+            { label: "Variables", code: "int x = 5;\ndouble d = 1.99;\nString s = \"Java\";\nboolean b = true;" }
           ]
         },
         {
-          title: "OOP",
+          title: "OOP Concepts",
           items: [
-            { label: "Class", code: "public class Dog {\n  String breed;\n  public void bark() {}\n}" },
-            { label: "Inheritance", code: "public class Poodle extends Dog {}" }
+            { label: "Constructor", code: "class User {\n  String name;\n  User(String name) { this.name = name; }\n}" },
+            { label: "Inheritance", code: "class Child extends Parent {\n  @Override void action() { ... }\n}" }
+          ]
+        },
+        {
+          title: "Collections & Streams",
+          items: [
+            { label: "ArrayList", code: "List<String> list = new ArrayList<>();\nlist.add(\"item\");\nlist.size();" },
+            { label: "Streams", code: "list.stream()\n    .filter(s -> s.startsWith(\"A\"))\n    .map(String::toUpperCase)\n    .forEach(System.out::println);" }
           ]
         }
       ]
     },
     cpp: {
       title: "C++ Cheat Sheet",
-      desc: "High-performance programming language.",
-      version: "20",
+      desc: "Advanced systems programming with high performance and memory control.",
+      version: "C++20",
       sections: [
         {
           title: "Basics",
           items: [
-            { label: "Main", code: "#include <iostream>\nint main() {\n  std::cout << \"Hello\";\n  return 0;\n}" },
-            { label: "Pointers", code: "int x = 10;\nint* ptr = &x;" },
-            { label: "Reference", code: "int& ref = x;" }
+            { label: "I/O", code: "#include <iostream>\nstd::cout << \"Output\" << std::endl;\nstd::cin >> x;" },
+            { label: "References/Pointers", code: "int x = 10;\nint &ref = x; // reference\nint *ptr = &x; // pointer" }
           ]
         },
         {
-          title: "STL",
+          title: "STL Containers",
           items: [
-            { label: "Vector", code: "std::vector<int> v = {1, 2, 3};\nv.push_back(4);" },
-            { label: "Map", code: "std::map<string, int> m;\nm[\"key\"] = 10;" }
+            { label: "Vector", code: "std::vector<int> v = {1, 2};\nv.push_back(3);\nv.at(0);" },
+            { label: "Unordered Map", code: "std::unordered_map<string, int> m;\nm[\"age\"] = 25;" }
+          ]
+        },
+        {
+          title: "Memory Management",
+          items: [
+            { label: "Dynamic Alloc", code: "int* p = new int(5);\ndelete p;" },
+            { label: "Smart Pointers", code: "auto p = std::make_unique<Data>();\nstd::shared_ptr<Data> p2 = p1;" }
           ]
         }
       ]
     },
     go: {
-      title: "Go Cheat Sheet",
-      desc: "Statically typed, compiled language designed at Google.",
-      version: "1.22",
+      title: "Go (Golang) Cheat Sheet",
+      desc: "Concurrent, efficient, and simple systems language from Google.",
+      version: "v1.22",
       sections: [
         {
-          title: "Basics",
+          title: "Syntax Basics",
           items: [
-            { label: "Main", code: "package main\nimport \"fmt\"\nfunc main() {\n  fmt.Println(\"Hello\")\n}" },
-            { label: "Variables", code: "var x int = 5\ny := 10" }
+            { label: "Variables", code: "var x int = 10\ny := 20 // short dec\nconst PI = 3.14" },
+            { label: "Structs", code: "type User struct {\n  Name string\n  Age  int\n}" },
+            { label: "Methods", code: "func (u User) Greet() string {\n  return \"Hi \" + u.Name\n}" }
           ]
         },
         {
           title: "Concurrency",
           items: [
-            { label: "Goroutine", code: "go doSomething()" },
-            { label: "Channel", code: "ch := make(chan int)\nch <- 1 // send\nval := <-ch // receive" }
+            { label: "Goroutines", code: "go someFunc()" },
+            { label: "Channels", code: "ch := make(chan string)\nch <- \"ping\"\nmsg := <-ch" },
+            { label: "Select", code: "select {\ncase m := <-c1: fmt.Println(m)\ncase <-time.After(time.Second): return\n}" }
+          ]
+        },
+        {
+          title: "Error Handling",
+          items: [
+            { label: "Pattern", code: "val, err := doWork()\nif err != nil {\n  return err\n}" }
           ]
         }
       ]
     },
     rust: {
       title: "Rust Cheat Sheet",
-      desc: "Language empowering everyone to build reliable and efficient software.",
-      version: "1.75",
+      desc: "Safe, concurrent, and high-performance systems language reference.",
+      version: "v1.75",
       sections: [
         {
-          title: "Basics",
+          title: "Core Syntax",
           items: [
-            { label: "Main", code: "fn main() {\n  println!(\"Hello\");\n}" },
-            { label: "Variables", code: "let x = 5;\nlet mut y = 10;" }
+            { label: "Variables", code: "let x = 5; // immutable\nlet mut y = 10; // mutable\nconst MAX: u32 = 100;" },
+            { label: "Functions", code: "fn add(a: i32, b: i32) -> i32 {\n  a + b\n}" }
           ]
         },
         {
-          title: "Ownership",
+          title: "Ownership & Borrowing",
           items: [
-            { label: "Move", code: "let s1 = String::from(\"hello\");\nlet s2 = s1; // s1 invalid" },
-            { label: "Borrow", code: "let len = calculate_length(&s1);" }
+            { label: "Concepts", code: "let s1 = String::from(\"hi\");\nlet s2 = s1; // move (s1 invalid)\nlet s3 = &s2; // borrow (ref)" },
+            { label: "Mutable Borrow", code: "let mut s = String::from(\"hi\");\nfb(&mut s);" }
+          ]
+        },
+        {
+          title: "Pattern Matching",
+          items: [
+            { label: "Match", code: "match num {\n  1 => println!(\"One\"),\n  2..=5 => println!(\"2 to 5\"),\n  _ => println!(\"Else\"),\n}" },
+            { label: "If Let", code: "if let Some(x) = opt { ... }" }
           ]
         }
       ]
     },
     php: {
-      title: "PHP Cheat Sheet",
-      desc: "Server-side scripting language suited for web development.",
-      version: "8.3",
+      title: "PHP 8.x Cheat Sheet",
+      desc: "Modern PHP syntax, array manipulation, and OOP reference.",
+      version: "v8.3",
       sections: [
         {
-          title: "Basics",
+          title: "Syntax Basics",
           items: [
-            { label: "Variables", code: "$name = 'John';\n$age = 25;" },
-            { label: "Echo", code: "echo 'Hello ' . $name;" },
-            { label: "Arrays", code: "$colors = ['red', 'green', 'blue'];" },
-            { label: "Assoc Array", code: "$user = ['name' => 'John', 'age' => 30];" }
+            { label: "Interpolation", code: "\"Hello $name\"" },
+            { label: "Null Coalescing", code: "$username = $_GET['user'] ?? 'guest';" },
+            { label: "Match (PHP 8)", code: "$result = match($status) {\n  200 => 'OK',\n  404 => 'Not Found',\n  default => 'Unknown'\n};" }
           ]
         },
         {
-          title: "Functions",
+          title: "Arrays",
           items: [
-            { label: "Define", code: "function add($a, $b) {\n  return $a + $b;\n}" },
-            { label: "Arrow Fn", code: "$add = fn($a, $b) => $a + $b;" }
+            { label: "Short Syntax", code: "$arr = [1, 2, 3];" },
+            { label: "Spread", code: "$new = [...$arr, 4];" },
+            { label: "Destructuring", code: "[$a, $b] = $array;" }
           ]
         },
         {
-          title: "Database (PDO)",
+          title: "OOP & Types",
           items: [
-            { label: "Connect", code: "$pdo = new PDO('mysql:host=localhost;dbname=test', $user, $pass);" },
-            { label: "Query", code: "$stmt = $pdo->query('SELECT * FROM users');\n$users = $stmt->fetchAll();" }
+            { label: "Constructor Prop", code: "class User {\n  public function __construct(\n    public string $name\n  ) {}\n}" },
+            { label: "Attributes", code: "#[ExampleAttribute]\nclass MyClass {}" }
           ]
         }
       ]
     },
     ruby: {
       title: "Ruby Cheat Sheet",
-      desc: "Dynamic, open source programming language with a focus on simplicity and productivity.",
-      version: "3.3",
+      desc: "Dynamic, programmer-friendly language for modern web apps.",
+      version: "v3.3",
       sections: [
         {
           title: "Basics",
           items: [
-            { label: "Variables", code: "name = 'John'\nage = 25" },
-            { label: "Output", code: "puts 'Hello World'" },
-            { label: "Interpolation", code: "puts \"Hello #{name}\"" },
-            { label: "Symbols", code: ":status" }
+            { label: "Blocks", code: "3.times { |i| puts i }\n[1,2].each { |n| puts n }" },
+            { label: "Symbols", code: ":id, :status" },
+            { label: "Interpolation", code: "\"Name: #{user.name}\"" }
           ]
         },
         {
-          title: "Control Flow",
+          title: "Classes",
           items: [
-            { label: "If/Else", code: "if x > 10\n  puts 'Big'\nelse\n  puts 'Small'\nend" },
-            { label: "Unless", code: "puts 'Ok' unless error" }
+            { label: "Define", code: "class Person\n  attr_reader :name\n  def initialize(name)\n    @name = name\n  end\nend" }
           ]
         },
         {
-          title: "Blocks & Iterators",
+          title: "Enumerable",
           items: [
-            { label: "Each", code: "[1, 2, 3].each do |n|\n  puts n\nend" },
-            { label: "Map", code: "[1, 2, 3].map { |n| n * 2 }" }
+            { label: "Methods", code: "arr.map(&:upcase)\narr.select { |n| n.even? }\narr.reduce(0, :+)" }
           ]
         }
       ]
     },
     swift: {
       title: "Swift Cheat Sheet",
-      desc: "Powerful and intuitive programming language for Apple platforms.",
-      version: "5.9",
+      desc: "Modern and safe programming language for iOS, macOS, and beyond.",
+      version: "v5.10",
       sections: [
         {
-          title: "Basics",
+          title: "Fundamentals",
           items: [
-            { label: "Variables", code: "var myVariable = 42\nmyVariable = 50" },
-            { label: "Constants", code: "let myConstant = 42" },
-            { label: "Print", code: "print(\"Hello, world!\")" }
+            { label: "Variables", code: "var name = \"Swift\"\nlet version = 5.10 // constant" },
+            { label: "Optionals", code: "var age: Int? = nil\nif let unwrapped = age { ... }" },
+            { label: "String Interp", code: "print(\"Value is \\(x)\")" }
           ]
         },
         {
-          title: "Control Flow",
+          title: "Collections",
           items: [
-            { label: "For Loop", code: "for i in 0..<5 {\n    print(i)\n}" },
-            { label: "Switch", code: "switch val {\ncase 1:\n    print(\"One\")\ndefault:\n    print(\"Other\")\n}" }
+            { label: "Arrays", code: "var list = [1, 2, 3]\nlist.append(4)" },
+            { label: "Dictionaries", code: "let dict = [\"key\": \"val\"]" }
           ]
         },
         {
-          title: "Functions",
+          title: "Functions & Closures",
           items: [
-            { label: "Define", code: "fun greet(name: String) -> String {\n    return \"Hello, \\(name).\"\n}" }
+            { label: "Function", code: "func greet(p: String) -> String {\n  return \"Hi \\(p)\"\n}" },
+            { label: "Closure", code: "let sum = { (a: Int, b: Int) -> Int in a + b }" }
+          ]
+        },
+        {
+          title: "Structs & Classes",
+          items: [
+            { label: "Struct", code: "struct Point {\n  var x, y: Int\n}" },
+            { label: "Class", code: "class User {\n  var name: String\n  init(name: String) { self.name = name }\n}" }
           ]
         }
       ]
     },
     kotlin: {
       title: "Kotlin Cheat Sheet",
-      desc: "Concise, cross-platform language for Android and more.",
-      version: "1.9",
+      desc: "Modern, concise language for Android, Server-side, and Multiplatform.",
+      version: "v1.9",
       sections: [
         {
-          title: "Basics",
+          title: "Core Syntax",
           items: [
-            { label: "Variables", code: "val name = \"John\" // Read-only\nvar age = 25 // Mutable" },
-            { label: "Nullable", code: "var name: String? = null" },
-            { label: "Print", code: "println(\"Hello, $name!\")" }
+            { label: "Variables", code: "val name = \"John\" // final\nvar age = 30 // mutable" },
+            { label: "Null Safety", code: "var s: String? = null // nullable\nval len = s?.length ?: 0 // elvis" },
+            { label: "Interp", code: "println(\"Hello $name\")" }
           ]
         },
         {
           title: "Functions",
           items: [
-            { label: "Define", code: "fun sum(a: Int, b: Int): Int {\n    return a + b\n}" },
-            { label: "Single Expression", code: "fun sum(a: Int, b: Int) = a + b" }
+            { label: "Basic", code: "fun add(a: Int, b: Int): Int = a + b" },
+            { label: "Default Args", code: "fun greet(n: String = \"User\") { ... }" }
           ]
         },
         {
-          title: "Classes",
+          title: "Data Classes & Smart Casts",
           items: [
-            { label: "Data Class", code: "data class User(val name: String, val age: Int)" }
+            { label: "Data Class", code: "data class User(val id: Int, val name: String)" },
+            { label: "When (Switch)", code: "when (x) {\n  1 -> println(\"One\")\n  is String -> println(\"it's a string\")\n  else -> println(\"else\")\n}" }
+          ]
+        },
+        {
+          title: "Coroutines",
+          items: [
+            { label: "Launch", code: "scope.launch {\n  val data = fetchData()\n  updateUI(data)\n}" },
+            { label: "Suspend", code: "suspend fun fetchData(): Data { ... }" }
           ]
         }
       ]
     },
     html: {
       title: "HTML5 Cheat Sheet",
-      desc: "Standard markup language for documents designed to be displayed in a web browser.",
+      desc: "Comprehensive guide to HTML5 elements, attributes, and semantic structure.",
       version: "5.2",
       sections: [
-        { title: "Structure", items: [{ label: "Boilerplate", code: "<!DOCTYPE html>\n<html>\n<body>\n</body>\n</html>" }] }
+        {
+          title: "Getting Started",
+          items: [
+            { label: "HTML5 Boilerplate", code: "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Document</title>\n</head>\n<body>\n  \n</body>\n</html>" },
+            { label: "Comment", code: "<!-- This is a comment -->" },
+            { label: "Paragraph", code: "<p>This is a paragraph.</p>" },
+            { label: "Link", code: "<a href=\"https://google.com\" target=\"_blank\">Link Name</a>" },
+            { label: "Image", code: "<img src=\"url\" alt=\"Description\" width=\"400\" height=\"400\">" }
+          ]
+        },
+        {
+          title: "Text Formatting",
+          items: [
+            { label: "Headings", code: "<h1>H1</h1>\n<h2>H2</h2>\n<h3>H3</h3>" },
+            { label: "Bold & Italic", code: "<b>Bold</b>\n<strong>Important</strong>\n<i>Italic</i>\n<em>Emphasized</em>" },
+            { label: "Lists (Unordered)", code: "<ul>\n  <li>Item 1</li>\n  <li>Item 2</li>\n</ul>" },
+            { label: "Lists (Ordered)", code: "<ol>\n  <li>First</li>\n  <li>Second</li>\n</ol>" }
+          ]
+        },
+        {
+          title: "Forms & Inputs",
+          items: [
+            { label: "Basic Form", code: "<form action=\"/submit\" method=\"POST\">\n  <input type=\"text\" name=\"username\">\n  <button type=\"submit\">Submit</button>\n</form>" },
+            { label: "Input Types", code: "<input type=\"email\">\n<input type=\"password\">\n<input type=\"checkbox\">\n<input type=\"radio\">" },
+            { label: "Select Menu", code: "<select name=\"cars\">\n  <option value=\"volvo\">Volvo</option>\n  <option value=\"saab\">Saab</option>\n</select>" },
+            { label: "Textarea", code: "<textarea rows=\"4\" cols=\"50\"></textarea>" }
+          ]
+        },
+        {
+          title: "Semantic Tags",
+          items: [
+            { label: "Navigation", code: "<nav>\n  <ul>\n    <li><a href=\"#\">Home</a></li>\n  </ul>\n</nav>" },
+            { label: "Sections", code: "<header></header>\n<main></main>\n<footer></footer>" },
+            { label: "Article & Aside", code: "<article>\n  <h2>Title</h2>\n  <p>Content</p>\n</article>\n<aside>\n  Related items\n</aside>" }
+          ]
+        },
+        {
+          title: "Tables",
+          items: [
+            { label: "Simple Table", code: "<table>\n  <tr>\n    <th>Header 1</th>\n    <th>Header 2</th>\n  </tr>\n  <tr>\n    <td>Value 1</td>\n    <td>Value 2</td>\n  </tr>\n</table>" }
+          ]
+        }
       ]
     },
     sass: {
       title: "SASS/SCSS Cheat Sheet",
-      desc: "CSS extension language.",
+      desc: "Powerful CSS extension language with variables, nesting, and more.",
       version: "1.70",
       sections: [
-        { title: "Features", items: [{ label: "Variables", code: "$primary: #333;" }, { label: "Nesting", code: ".nav {\n  ul {\n    margin: 0;\n  }\n}" }] }
+        {
+          title: "Basics",
+          items: [
+            { label: "Variables", code: "$primary-color: #333;\n$font-stack: Helvetica, sans-serif;\n\nbody {\n  color: $primary-color;\n  font: $font-stack;\n}" },
+            { label: "Nesting", code: "nav {\n  ul {\n    margin: 0;\n    padding: 0;\n    list-style: none;\n  }\n  li { display: inline-block; }\n  a {\n    display: block;\n    padding: 6px 12px;\n    text-decoration: none;\n  }\n}" },
+            { label: "Import", code: "@import \"reset.scss\";\n@import \"base\", \"typography\";" }
+          ]
+        },
+        {
+          title: "Advanced Features",
+          items: [
+            { label: "Mixins", code: "@mixin theme($theme: DarkGray) {\n  background: $theme;\n  box-shadow: 0 0 1px rgba($theme, .25);\n  color: #fff;\n}\n\n.info {\n  @include theme;\n}\n.alert {\n  @include theme($theme: DarkRed);\n}" },
+            { label: "Extend/Inheritance", code: "%message-shared {\n  border: 1px solid #ccc;\n  padding: 10px;\n  color: #333;\n}\n\n.message { @extend %message-shared; }\n.success { @extend %message-shared; border-color: green; }\n.error { @extend %message-shared; border-color: red; }" },
+            { label: "Operators", code: ".container { width: 100% - 20px; }\narticle[role=\"main\"] { float: left; width: 600px / 960px * 100%; }" }
+          ]
+        },
+        {
+          title: "Interpolation & Functions",
+          items: [
+            { label: "String Interpolation", code: "$wk: -webkit-;\n.rounded-box {\n  #{$wk}border-radius: 4px;\n}" },
+            { label: "Color Functions", code: "lighten(#007aff, 10%)\ndarken(#007aff, 10%)\nopacify(#007aff, 0.1)\ntransparentize(#007aff, 0.1)" }
+          ]
+        },
+        {
+          title: "Control Flow",
+          items: [
+            { label: "For Loop", code: "@for $i from 1 through 3 {\n  .item-#{$i} { width: 2em * $i; }\n}" },
+            { label: "Each Loop", code: "@each $animal in puma, sea-slug, egret, salamander {\n  .#{$animal}-icon {\n    background-image: url('/images/#{$animal}.png');\n  }\n}" },
+            { label: "While Loop", code: "$i: 6;\n@while $i > 0 {\n  .item-#{$i} { width: 2em * $i; }\n  $i: $i - 2;\n}" }
+          ]
+        }
       ]
     },
     tailwind: {
       title: "Tailwind CSS Cheat Sheet",
-      desc: "Utility-first CSS framework.",
+      desc: "Utility-first CSS framework for rapid UI development.",
       version: "v3.4",
       sections: [
-        { title: "Layout", items: [{ label: "Flex", code: "flex flex-col items-center justify-center" }, { label: "Grid", code: "grid grid-cols-3 gap-4" }] }
+        {
+          title: "Layout",
+          items: [
+            { label: "Display", code: "block, inline-block, inline, flex, inline-flex, table, grid, hidden" },
+            { label: "Flexbox", code: "flex-row, flex-col, flex-wrap, flex-1, flex-auto, flex-none" },
+            { label: "Grid", code: "grid-cols-1, grid-cols-2, grid-cols-3, grid-cols-4, gap-4" },
+            { label: "Z-Index", code: "z-0, z-10, z-20, z-30, z-40, z-50, z-auto" }
+          ]
+        },
+        {
+          title: "Spacing & Sizing",
+          items: [
+            { label: "Padding", code: "p-0, p-1, p-2, p-3, p-4, px-4, py-2, pt-1, pr-1, pb-1, pl-1" },
+            { label: "Margin", code: "m-0, m-1, m-2, m-3, m-4, mx-4, my-2, mt-1, mr-1, mb-1, ml-1" },
+            { label: "Width", code: "w-0, w-px, w-1, w-2, w-3, w-4, w-auto, w-full, w-screen" },
+            { label: "Height", code: "h-0, h-px, h-1, h-2, h-3, h-4, h-auto, h-full, h-screen" }
+          ]
+        },
+        {
+          title: "Typography",
+          items: [
+            { label: "Font Size", code: "text-xs, text-sm, text-base, text-lg, text-xl, text-2xl" },
+            { label: "Font Weight", code: "font-thin, font-light, font-normal, font-medium, font-bold" },
+            { label: "Text Alignment", code: "text-left, text-center, text-right, text-justify" },
+            { label: "Text Color", code: "text-gray-500, text-red-500, text-blue-500, text-green-500" }
+          ]
+        },
+        {
+          title: "Backgrounds & Borders",
+          items: [
+            { label: "Background Color", code: "bg-gray-500, bg-red-500, bg-blue-500, bg-green-500" },
+            { label: "Border Width", code: "border-0, border-2, border-4, border-8" },
+            { label: "Border Color", code: "border-gray-500, border-red-500, border-blue-500" },
+            { label: "Border Radius", code: "rounded-sm, rounded, rounded-md, rounded-lg, rounded-full" }
+          ]
+        },
+        {
+          title: "Interactive",
+          items: [
+            { label: "Hover", code: "hover:bg-blue-700 hover:scale-105" },
+            { label: "Focus", code: "focus:outline-none focus:ring-2" },
+            { label: "Transitions", code: "transition, transition-all, duration-75, duration-150, ease-in" }
+          ]
+        }
       ]
     },
     vue: {
       title: "Vue.js Cheat Sheet",
-      desc: "Progressive JavaScript Framework.",
+      desc: "Reactivity, Components, and the Composition API for Vue 3.",
       version: "v3",
       sections: [
-        { title: "Basics", items: [{ label: "Composition API", code: "<script setup>\nimport { ref } from 'vue'\nconst count = ref(0)\n</script>" }] }
+        {
+          title: "Setup & Directives",
+          items: [
+            { label: "Directives", code: "v-bind (:) - Bind attributes\nv-on (@) - Listen to events\nv-model - Two-way binding\nv-if / v-else - Conditional rendering\nv-show - Toggle visibility\nv-for - List rendering" },
+            { label: "Attribute Binding", code: "<img :src=\"imageSrc\">\n<button :disabled=\"isPending\">Submit</button>" },
+            { label: "Event Handling", code: "<button @click=\"count++\">Add</button>\n<form @submit.prevent=\"onSubmit\">...</form>" }
+          ]
+        },
+        {
+          title: "Composition API",
+          items: [
+            { label: "Reactivity", code: "import { ref, reactive, computed, watch } from 'vue'\n\nconst count = ref(0)\nconst state = reactive({ name: 'Vue' })\nconst double = computed(() => count.value * 2)" },
+            { label: "Watchers", code: "watch(count, (newVal, oldVal) => {\n  console.log(`Changed from ${oldVal} to ${newVal}`)\n})" },
+            { label: "Lifecycle Hooks", code: "onMounted(() => ...)\nonUnmounted(() => ...)\nonUpdated(() => ...)" }
+          ]
+        },
+        {
+          title: "Components",
+          items: [
+            { label: "SFC Template", code: "<script setup>\n  import Child from './Child.vue'\n  const props = defineProps(['msg'])\n  const emit = defineEmits(['change'])\n</script>\n\n<template>\n  <h1>{{ msg }}</h1>\n</template>" },
+            { label: "Slots", code: "<slot name=\"header\"></slot>\n<slot></slot> // Default slot" }
+          ]
+        },
+        {
+          title: "Vue Router & Pinia",
+          items: [
+            { label: "Navigation", code: "<router-link to=\"/\">Home</router-link>\n<router-view></router-view>" },
+            { label: "Programmatic Nav", code: "import { useRouter } from 'vue-router'\nconst router = useRouter()\nrouter.push('/dashboard')" },
+            { label: "Pinia Store", code: "import { defineStore } from 'pinia'\nexport const useStore = defineStore('main', {\n  state: () => ({ counter: 0 }),\n  actions: { increment() { this.counter++ } }\n})" }
+          ]
+        }
       ]
     },
     angular: {
       title: "Angular Cheat Sheet",
-      desc: "Platform for building mobile and desktop web applications.",
+      desc: "Enterprise-grade framework for building scalable web applications.",
       version: "v17",
       sections: [
-        { title: "Component", items: [{ label: "Decorator", code: "@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html'\n})" }] }
+        {
+          title: "Component & Template",
+          items: [
+            { label: "Component Decorator", code: "@Component({\n  selector: 'app-user',\n  standalone: true,\n  template: `<h1>Hello {{ name }}</h1>`\n})\nexport class UserComponent { name = 'Angular'; }" },
+            { label: "Interpolation", code: "{{ value }}" },
+            { label: "Property Binding", code: "[property]=\"value\"" },
+            { label: "Event Binding", code: "(click)=\"handler()\"" },
+            { label: "Two-way Binding", code: "[(ngModel)]=\"value\"" }
+          ]
+        },
+        {
+          title: "Control Flow (v17+)",
+          items: [
+            { label: "@if", code: "@if (loggedIn) {\n  <p>Welcome!</p>\n} @else {\n  <button>Login</button>\n}" },
+            { label: "@for", code: "@for (item of items; track item.id) {\n  <li>{{ item.name }}</li>\n} @empty {\n  <li>No items</li>\n}" }
+          ]
+        },
+        {
+          title: "Dependency Injection",
+          items: [
+            { label: "Service", code: "@Injectable({ providedIn: 'root' })\nexport class DataService { ... }" },
+            { label: "Inject Service", code: "export class MyComp {\n  private dataService = inject(DataService);\n}" }
+          ]
+        },
+        {
+          title: "Signals",
+          items: [
+            { label: "Writable Signal", code: "const count = signal(0);\ncount.set(1);\ncount.update(n => n + 1);" },
+            { label: "Computed Signal", code: "const double = computed(() => count() * 2);" },
+            { label: "Effect", code: "effect(() => console.log(count()));" }
+          ]
+        }
       ]
     },
     svelte: {
       title: "Svelte Cheat Sheet",
-      desc: "Cybernetically enhanced web apps.",
+      desc: "Highly efficient framework that compiles code at build time.",
       version: "v4",
       sections: [
-        { title: "Script", items: [{ label: "Reactive", code: "<script>\n  let count = 0;\n  $: doubled = count * 2;\n</script>" }] }
+        {
+          title: "Reactivity",
+          items: [
+            { label: "State", code: "<script>\n  let count = 0;\n  const increment = () => count += 1;\n</script>\n<button on:click={increment}>{count}</button>" },
+            { label: "Reactive Declarations", code: "$: doubled = count * 2;\n$: if (count >= 10) alert('High!');" }
+          ]
+        },
+        {
+          title: "Templating",
+          items: [
+            { label: "If/Else", code: "{#if count > 10}\n  <p>Large</p>\n{:else}\n  <p>Small</p>\n{/if}" },
+            { label: "Each Loop", code: "{#each items as item (item.id)}\n  <li>{item.name}</li>\n{/each}" }
+          ]
+        },
+        {
+          title: "Props & Events",
+          items: [
+            { label: "Export Props", code: "// In Child.svelte\nexport let name = 'Friend';" },
+            { label: "Event Dispatcher", code: "import { createEventDispatcher } from 'svelte';\nconst dispatch = createEventDispatcher();\ndispatch('notify', { text: 'Hello' });" }
+          ]
+        },
+        {
+          title: "Stores",
+          items: [
+            { label: "Writable Store", code: "import { writable } from 'svelte/store';\nexport const count = writable(0);\ncount.update(n => n + 1);\ncount.set(100);" },
+            { label: "Auto-subscription", code: "<h1>The count is {$count}</h1>" }
+          ]
+        }
       ]
     },
     nextjs: {
       title: "Next.js Cheat Sheet",
-      desc: "The React Framework for the Web.",
+      desc: "The React Production Framework with App Router support.",
       version: "v14",
       sections: [
-        { title: "Routing", items: [{ label: "Page", code: "export default function Page() {\n  return <h1>Hello</h1>\n}" }] }
+        {
+          title: "App Router Routing",
+          items: [
+            { label: "Page File", code: "// app/page.tsx\nexport default function Page() {\n  return <h1>Home Page</h1>\n}" },
+            { label: "Dynamic Segment", code: "// app/blog/[slug]/page.tsx\nexport default function Post({ params }) {\n  return <h1>Post: {params.slug}</h1>\n}" },
+            { label: "Layout File", code: "// app/layout.tsx\nexport default function Layout({ children }) {\n  return <html><body>{children}</body></html>\n}" }
+          ]
+        },
+        {
+          title: "Server Components & Actions",
+          items: [
+            { label: "Server Action", code: "// actions.ts\n'use server'\nexport async function create() { ... }" },
+            { label: "Client Component", code: "'use client'\nimport { useState } from 'react'\n..." }
+          ]
+        },
+        {
+          title: "Data Fetching",
+          items: [
+            { label: "Fetch in Component", code: "async function getData() {\n  const res = await fetch('https://api...')\n  return res.json()\n}\n\nexport default async function Page() {\n  const data = await getData()\n  return <main>...</main>\n}" },
+            { label: "Revalidation", code: "fetch(url, { next: { revalidate: 3600 } })" }
+          ]
+        },
+        {
+          title: "Special Files",
+          items: [
+            { label: "loading.tsx", code: "export default function Loading() { return <Skeleton /> }" },
+            { label: "error.tsx", code: "'use client'\nexport default function Error() { return <div>Error!</div> }" },
+            { label: "not-found.tsx", code: "export default function NotFound() { ... }" }
+          ]
+        }
       ]
     },
     graphql: {
       title: "GraphQL Cheat Sheet",
-      desc: "Query language for APIs.",
+      desc: "Schema definition, queries, mutations, and fragments for GraphQL.",
       version: "Spec",
       sections: [
-        { title: "Operations", items: [{ label: "Query", code: "query {\n  user(id: \"1\") {\n    name\n  }\n}" }] }
+        {
+          title: "Query & Mutation",
+          items: [
+            { label: "Basic Query", code: "query GetUser {\n  user(id: \"1\") {\n    name\n    email\n  }\n}" },
+            { label: "Arguments", code: "query GetItems($limit: Int) {\n  items(limit: $limit) {\n    title\n  }\n}" },
+            { label: "Mutation", code: "mutation CreateUser($input: UserInput!) {\n  createUser(input: $input) {\n    id\n    name\n  }\n}" },
+            { label: "Aliases", code: "query {\n  admin: user(role: ADMIN) { name }\n  guest: user(role: GUEST) { name }\n}" }
+          ]
+        },
+        {
+          title: "Fragments & Variables",
+          items: [
+            { label: "Fragment", code: "fragment UserFields on User {\n  id\n  name\n  avatarUrl\n}\n\nquery {\n  user(id: \"1\") { ...UserFields }\n}" },
+            { label: "Variables JSON", code: "{\n  \"limit\": 10,\n  \"input\": { \"name\": \"John\" }\n}" }
+          ]
+        },
+        {
+          title: "Schema Definition (SDL)",
+          items: [
+            { label: "Types", code: "type User {\n  id: ID!\n  username: String!\n  posts: [Post]!\n}" },
+            { label: "Query Type", code: "type Query {\n  user(id: ID!): User\n  allUsers: [User]\n}" },
+            { label: "Enums & Unions", code: "enum Role { ADMIN, USER }\nunion SearchResult = User | Post" }
+          ]
+        }
       ]
     },
     mongodb: {
       title: "MongoDB Cheat Sheet",
-      desc: "Source-available cross-platform document-oriented database program.",
+      desc: "NoSQL document database operations and aggregation pipeline.",
       version: "v7.0",
       sections: [
-        { title: "CRUD", items: [{ label: "Find", code: "db.collection.find({ age: { $gt: 18 } })" }] }
+        {
+          title: "CRUD Operations",
+          items: [
+            { label: "Insert", code: "db.collection.insertOne({ name: 'John' })\ndb.collection.insertMany([{ name: 'A' }, { name: 'B' }])" },
+            { label: "Find", code: "db.collection.find({ age: { $gt: 18 } })\ndb.collection.findOne({ id: 1 })" },
+            { label: "Update", code: "db.collection.updateOne(\n  { _id: 1 },\n  { $set: { status: 'active' } }\n)" },
+            { label: "Delete", code: "db.collection.deleteOne({ _id: 1 })\ndb.collection.deleteMany({ status: 'inactive' })" }
+          ]
+        },
+        {
+          title: "Query Operators",
+          items: [
+            { label: "Comparison", code: "$eq, $ne, $gt, $lt, $gte, $lte, $in, $nin" },
+            { label: "Logical", code: "$and, $or, $not, $nor" },
+            { label: "Element", code: "$exists, $type" }
+          ]
+        },
+        {
+          title: "Aggregation Pipeline",
+          items: [
+            { label: "Match", code: "{ $match: { status: 'A' } }" },
+            { label: "Group", code: "{ $group: { _id: '$category', total: { $sum: 1 } } }" },
+            { label: "Sort & Limit", code: "{ $sort: { age: -1 } }, { $limit: 5 }" },
+            { label: "Project", code: "{ $project: { name: 1, email: 1, _id: 0 } }" }
+          ]
+        },
+        {
+          title: "Indexing",
+          items: [
+            { label: "Create Index", code: "db.collection.createIndex({ email: 1 }, { unique: true })" },
+            { label: "List Indexes", code: "db.collection.getIndexes()" }
+          ]
+        }
       ]
     },
     redis: {
       title: "Redis Cheat Sheet",
-      desc: "In-memory data structure store.",
+      desc: "Fast, in-memory data store for caching and real-time data.",
       version: "v7.2",
       sections: [
-        { title: "Strings", items: [{ label: "Set/Get", code: "SET key value\nGET key" }] }
+        {
+          title: "Strings & Basics",
+          items: [
+            { label: "Set/Get", code: "SET user:1 \"John\"\nGET user:1" },
+            { label: "Incr/Decr", code: "INCR counter\nDECRBY counter 10" },
+            { label: "Exists/Del", code: "EXISTS key\nDEL key" },
+            { label: "Expire (TTL)", code: "EXPIRE user:1 3600\nTTL user:1" }
+          ]
+        },
+        {
+          title: "Lists & Hashes",
+          items: [
+            { label: "Lists", code: "LPUSH queue task1\nRPop queue\nLRANGE queue 0 -1" },
+            { label: "Hashes", code: "HSET user:1 name \"John\" age 30\nHGET user:1 name\nHGETALL user:1" }
+          ]
+        },
+        {
+          title: "Sets & Sorted Sets",
+          items: [
+            { label: "Sets", code: "SADD tags \"news\"\nSMEMBERS tags\nSISMEMBER tags \"news\"" },
+            { label: "Sorted Sets", code: "ZADD leaderboard 100 \"John\" 150 \"Alice\"\nZRANGE leaderboard 0 -1 WITHSCORES" }
+          ]
+        },
+        {
+          title: "Pub/Sub",
+          items: [
+            { label: "Publish", code: "PUBLISH channel1 \"hello\"" },
+            { label: "Subscribe", code: "SUBSCRIBE channel1" }
+          ]
+        }
       ]
     },
     postgresql: {
       title: "PostgreSQL Cheat Sheet",
-      desc: "Open source relational database.",
+      desc: "Advanced open-source relational database with powerful SQL support.",
       version: "v16",
       sections: [
-        { title: "JSON", items: [{ label: "Query JSON", code: "SELECT info ->> 'name' FROM users;" }] }
+        {
+          title: "Basic Commands",
+          items: [
+            { label: "psql Connect", code: "\\c database_name" },
+            { label: "List Databases", code: "\\l" },
+            { label: "List Tables", code: "\\dt" },
+            { label: "Describe Table", code: "\\d table_name" }
+          ]
+        },
+        {
+          title: "Table Operations",
+          items: [
+            { label: "Create Table", code: "CREATE TABLE users (\n  id SERIAL PRIMARY KEY,\n  name VARCHAR(100),\n  created_at TIMESTAMP DEFAULT NOW()\n);" },
+            { label: "Alter Table", code: "ALTER TABLE users ADD COLUMN age INT;" }
+          ]
+        },
+        {
+          title: "Querying & JSONB",
+          items: [
+            { label: "Basic Select", code: "SELECT * FROM users WHERE age > 21 LIMIT 10;" },
+            { label: "JSONB Query", code: "SELECT metadata->>'role' FROM users WHERE metadata @> '{\"status\": \"active\"}';" },
+            { label: "JSONB Update", code: "UPDATE users SET metadata = metadata || '{\"premium\": true}';" }
+          ]
+        },
+        {
+          title: "Common Functions",
+          items: [
+            { label: "Aggregates", code: "COUNT(*), SUM(vol), AVG(price), MIN(val), MAX(val)" },
+            { label: "CTE (WITH)", code: "WITH recent_users AS (\n  SELECT * FROM users WHERE created_at > NOW() - INTERVAL '1 day'\n)\nSELECT * FROM recent_users;" }
+          ]
+        }
       ]
     },
     kubernetes: {
       title: "Kubernetes Cheat Sheet",
-      desc: "Container orchestration.",
+      desc: "Container orchestration, workload management, and cluster operations.",
       version: "v1.29",
       sections: [
-        { title: "Pods", items: [{ label: "Get Pods", code: "kubectl get pods" }, { label: "Logs", code: "kubectl logs <pod-name>" }] }
+        {
+          title: "Basic Commands",
+          items: [
+            { label: "Check Status", code: "kubectl cluster-info\nkubectl get nodes\nkubectl version" },
+            { label: "Context & Namespace", code: "kubectl config get-contexts\nkubectl config use-context <name>\nkubectl get ns" }
+          ]
+        },
+        {
+          title: "Workloads (Pods/Deploy)",
+          items: [
+            { label: "Pods", code: "kubectl get pods\nkubectl run redis --image=redis\nkubectl describe pod <name>" },
+            { label: "Deployments", code: "kubectl get deploy\nkubectl create deployment nginx --image=nginx\nkubectl scale deploy nginx --replicas=3" },
+            { label: "Logs & Exec", code: "kubectl logs <pod-name>\nkubectl exec -it <pod-name> -- /bin/bash" }
+          ]
+        },
+        {
+          title: "Services & Networking",
+          items: [
+            { label: "Services", code: "kubectl get svc\nkubectl expose deploy nginx --port=80 --type=NodePort" },
+            { label: "Port Forward", code: "kubectl port-forward <pod-name> 8080:80" },
+            { label: "Ingress", code: "kubectl get ingress" }
+          ]
+        },
+        {
+          title: "Config & Storage",
+          items: [
+            { label: "ConfigMaps/Secrets", code: "kubectl get configmaps\nkubectl get secrets" },
+            { label: "Apply YAML", code: "kubectl apply -f manifest.yaml\nkubectl delete -f manifest.yaml" }
+          ]
+        }
       ]
     },
     aws: {
       title: "AWS CLI Cheat Sheet",
-      desc: "Unified tool to manage AWS services.",
+      desc: "Managing AWS services via the command line interface.",
       version: "v2",
       sections: [
-        { title: "S3", items: [{ label: "List Buckets", code: "aws s3 ls" }, { label: "Copy", code: "aws s3 cp file.txt s3://bucket/" }] }
+        {
+          title: "Configuration",
+          items: [
+            { label: "Configure", code: "aws configure\naws configure --profile <name>" },
+            { label: "Check Caller", code: "aws sts get-caller-identity" }
+          ]
+        },
+        {
+          title: "S3 (Storage)",
+          items: [
+            { label: "List Buckets", code: "aws s3 ls" },
+            { label: "Object Ops", code: "aws s3 cp file.txt s3://bucket/\naws s3 sync . s3://bucket/\naws s3 rm s3://bucket/file.txt" }
+          ]
+        },
+        {
+          title: "EC2 (Computing)",
+          items: [
+            { label: "Instances", code: "aws ec2 describe-instances\naws ec2 start-instances --instance-ids <id>\naws ec2 stop-instances --instance-ids <id>" }
+          ]
+        },
+        {
+          title: "Lambda & IAM",
+          items: [
+            { label: "Lambda", code: "aws lambda list-functions\naws lambda invoke --function-name <name> out.json" },
+            { label: "IAM", code: "aws iam list-users\naws iam create-user --user-name <name>" }
+          ]
+        }
       ]
     },
     jenkins: {
       title: "Jenkins Cheat Sheet",
-      desc: "Open source automation server.",
+      desc: "Automation server for continuous integration and delivery.",
       version: "LTS",
       sections: [
-        { title: "Pipeline", items: [{ label: "Syntax", code: "pipeline {\n  agent any\n  stages {\n    stage('Build') { steps { sh 'make' } }\n  }\n}" }] }
+        {
+          title: "Declarative Pipeline",
+          items: [
+            { label: "Basic Blueprint", code: "pipeline {\n  agent any\n  stages {\n    stage('Build') { steps { sh 'npm install' } }\n    stage('Test') { steps { sh 'npm test' } }\n    stage('Deploy') { steps { echo 'Deploying...' } }\n  }\n}" },
+            { label: "Environment Vars", code: "environment {\n  DB_USER = 'admin'\n  API_KEY = credentials('my-api-key')\n}" }
+          ]
+        },
+        {
+          title: "Steps & Post",
+          items: [
+            { label: "Common Steps", code: "sh 'script.sh'\necho 'message'\narchiveArtifacts 'build/**/*'\njunit 'tests/*.xml'" },
+            { label: "Post Actions", code: "post {\n  always { echo 'Done' }\n  success { echo 'Success!' }\n  failure { mail to: 'me@ex.com', subject: 'Failed' }\n}" }
+          ]
+        },
+        {
+          title: "Triggers & Parameters",
+          items: [
+            { label: "Triggers", code: "triggers {\n  cron('H 4 * * *')\n  pollSCM('H/15 * * * *')\n}" },
+            { label: "Parameters", code: "parameters {\n  string(name: 'BRANCH', defaultValue: 'main')\n  booleanParam(name: 'DEBUG', defaultValue: true)\n}" }
+          ]
+        }
       ]
     },
     terraform: {
       title: "Terraform Cheat Sheet",
-      desc: "Infrastructure as Code tool.",
+      desc: "Infrastructure as Code tool for building and versioning infrastructure safely.",
       version: "1.7",
       sections: [
-        { title: "Commands", items: [{ label: "Init", code: "terraform init" }, { label: "Apply", code: "terraform apply" }] }
+        {
+          title: "Core Workflow",
+          items: [
+            { label: "Initialize", code: "terraform init" },
+            { label: "Plan", code: "terraform plan" },
+            { label: "Apply", code: "terraform apply\nterraform apply -auto-approve" },
+            { label: "Destroy", code: "terraform destroy" }
+          ]
+        },
+        {
+          title: "Resource & Provider",
+          items: [
+            { label: "Provider", code: "provider \"aws\" {\n  region = \"us-east-1\"\n}" },
+            { label: "Resource", code: "resource \"aws_instance\" \"web\" {\n  ami = \"ami-12345\"\n  instance_type = \"t2.micro\"\n}" }
+          ]
+        },
+        {
+          title: "Variables & Output",
+          items: [
+            { label: "Variables", code: "variable \"region\" { default = \"us-east-1\" }\nvar.region" },
+            { label: "Outputs", code: "output \"ip\" { value = aws_instance.web.public_ip }" }
+          ]
+        },
+        {
+          title: "State Management",
+          items: [
+            { label: "State Commands", code: "terraform state list\nterraform state show <name>\nterraform state rm <name>" }
+          ]
+        }
       ]
     },
     ansible: {
       title: "Ansible Cheat Sheet",
-      desc: "IT automation tool.",
+      desc: "Simple, agentless IT automation for configuration management and app deployment.",
       version: "2.16",
       sections: [
-        { title: "Playbook", items: [{ label: "Run", code: "ansible-playbook playbook.yml" }] }
+        {
+          title: "Ad-Hoc Commands",
+          items: [
+            { label: "Ping", code: "ansible all -m ping" },
+            { label: "Shell Command", code: "ansible all -a \"uptime\"" },
+            { label: "Copy File", code: "ansible all -m copy -a \"src=file.txt dest=/tmp/\"" }
+          ]
+        },
+        {
+          title: "Playbooks",
+          items: [
+            { label: "Run Playbook", code: "ansible-playbook site.yml" },
+            { label: "Syntax Check", code: "ansible-playbook site.yml --syntax-check" },
+            { label: "Inventory", code: "ansible-playbook -i inventory.ini site.yml" }
+          ]
+        },
+        {
+          title: "Playbook Syntax",
+          items: [
+            { label: "Structure", code: "- name: Setup Server\n  hosts: all\n  tasks:\n    - name: Install Nginx\n      apt: name=nginx state=latest" },
+            { label: "Variables", code: "vars:\n  http_port: 80\ntasks:\n  - debug: msg=\"Port is {{ http_port }}\"" }
+          ]
+        },
+        {
+          title: "Handlers & Roles",
+          items: [
+            { label: "Handlers", code: "tasks:\n  - apt: name=nginx\n    notify: restart nginx\n\nhandlers:\n  - name: restart nginx\n    service: name=nginx state=restarted" },
+            { label: "Roles", code: "roles:\n  - role: common\n  - role: webservers" }
+          ]
+        }
       ]
     },
     linux: {
-      title: "Linux Command Line Cheat Sheet",
-      desc: "Common Linux/Unix commands.",
-      version: "Std",
+      title: "Linux CLI Cheat Sheet",
+      desc: "Essential Unix/Linux commands for terminal productivity.",
+      version: "Latest",
       sections: [
-        { title: "Permissions", items: [{ label: "Chmod", code: "chmod 755 file" }, { label: "Chown", code: "chown user:group file" }] }
+        {
+          title: "File Operations",
+          items: [
+            { label: "ls", code: "ls -la // list all files\nls -lh // human readable sizes" },
+            { label: "cp / mv", code: "cp src dest // copy\nmv old new // move/rename" },
+            { label: "rm", code: "rm -rf dir // recursive force delete" },
+            { label: "mkdir / touch", code: "mkdir -p a/b // create directory tree\ntouch file.txt // create empty file" }
+          ]
+        },
+        {
+          title: "Searching",
+          items: [
+            { label: "grep", code: "grep \"pattern\" file\ngrep -r \"pattern\" . // recursive" },
+            { label: "find", code: "find . -name \"*.txt\"\nfind /var/log -type f -mtime +30" }
+          ]
+        },
+        {
+          title: "Permissions",
+          items: [
+            { label: "chmod", code: "chmod 755 script.sh\nchmod u+x file" },
+            { label: "chown", code: "chown user:group file\nsudo chown -R $USER:$USER ." }
+          ]
+        },
+        {
+          title: "System Info",
+          items: [
+            { label: "Top/Htop", code: "top\nhtop // interactive process viewer" },
+            { label: "Disk Usage", code: "df -h // disk space\ndu -sh . // folder size" }
+          ]
+        }
       ]
     },
     powershell: {
       title: "PowerShell Cheat Sheet",
-      desc: "Cross-platform task automation solution.",
-      version: "v7",
+      desc: "Windows-native and cross-platform automation and configuration shell.",
+      version: "v7.4",
       sections: [
-        { title: "Cmdlets", items: [{ label: "Process", code: "Get-Process | Where-Object {$_.CPU -gt 10}" }] }
+        {
+          title: "File System",
+          items: [
+            { label: "List Items", code: "ls\nGet-ChildItem -Recurse" },
+            { label: "New Item", code: "New-Item -ItemType File name.txt\nmkdir folder" },
+            { label: "Copy/Move", code: "Copy-Item src dest\nMove-Item old new" }
+          ]
+        },
+        {
+          title: "Pipeline & Filtering",
+          items: [
+            { label: "Where-Object", code: "Get-Service | Where-Object Status -eq 'Running'" },
+            { label: "Select-Object", code: "Get-Process | Select-Object Name, Id -First 10" },
+            { label: "ForEach-Object", code: "1..5 | ForEach-Object { $_ * 2 }" }
+          ]
+        },
+        {
+          title: "Common Verbs",
+          items: [
+            { label: "Get", code: "Get-Command\nGet-Help Get-Service" },
+            { label: "Set", code: "Set-ExecutionPolicy RemoteSigned" }
+          ]
+        }
       ]
     },
     npm: {
-      title: "NPM/Yarn Cheat Sheet",
-      desc: "Package manager for the web.",
-      version: "v10",
+      title: "NPM & package.json",
+      desc: "Node Package Manager reference for dependencies and scripts.",
+      version: "v10+",
       sections: [
-        { title: "Commands", items: [{ label: "Install", code: "npm install <pkg>" }, { label: "Run", code: "npm run dev" }] }
+        {
+          title: "Basic Commands",
+          items: [
+            { label: "Install", code: "npm install // all from package.json\nnpm install <name> // save to dependencies\nnpm i <name> -D // save to devDependencies" },
+            { label: "Update/Uninstall", code: "npm update <name>\nnpm uninstall <name>" },
+            { label: "Run Scripts", code: "npm run dev\nnpm start" }
+          ]
+        },
+        {
+          title: "Management",
+          items: [
+            { label: "Init", code: "npm init -y" },
+            { label: "List", code: "npm list --depth=0" },
+            { label: "Outdated", code: "npm outdated" }
+          ]
+        },
+        {
+          title: "Semantic Versioning",
+          items: [
+            { label: "Caret (^)", code: "^1.2.3 // 1.x.x (updates minor/patch)" },
+            { label: "Tilde (~)", code: "~1.2.3 // 1.2.x (updates patch only)" },
+            { label: "Exact", code: "1.2.3 // only this version" }
+          ]
+        }
       ]
     },
     "react-hooks": {
