@@ -171,10 +171,10 @@ const Notes = () => {
   };
 
   return (
-    <div className="h-full flex flex-col md:flex-row gap-6 relative">
+    <div className="h-full flex flex-col md:flex-row gap-6 relative min-h-[75vh] md:min-h-0">
 
       {/* Sidebar / List of Notes */}
-      <div className={`w-full md:w-1/3 flex flex-col gap-4 ${activeNote ? 'hidden md:flex' : 'flex'} h-[calc(100vh-140px)] md:h-[calc(100vh-140px)]`}>
+      <div className={`w-full md:w-1/3 flex flex-col gap-4 ${activeNote ? 'hidden md:flex' : 'flex'} h-[75vh] min-h-[500px] md:h-[calc(100vh-140px)] md:min-h-0`}>
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-bold text-white">My Notes</h2>
           <button
@@ -248,7 +248,7 @@ const Notes = () => {
       </div>
 
       {/* Editor Area */}
-      <div className={`flex-1 bg-[#121212] border border-white/5 rounded-xl p-4 md:p-6 flex-col h-[calc(100vh-140px)] md:h-[calc(100vh-140px)] ${activeNote ? 'flex' : 'hidden md:flex'}`}>
+      <div className={`flex-1 bg-[#121212] border border-white/5 rounded-xl p-4 md:p-6 flex-col h-[75vh] min-h-[500px] md:h-[calc(100vh-140px)] md:min-h-0 ${activeNote ? 'flex' : 'hidden md:flex'}`}>
         {isEditing ? (
           <>
             <div className="flex flex-col gap-4 mb-4 border-b border-white/5 pb-4">
@@ -301,13 +301,13 @@ const Notes = () => {
               </div>
             </div>
             
-            <div className="flex-1 overflow-y-auto min-h-0 scrollbar-thin scrollbar-thumb-white/10 pr-2">
+            <div className="flex-1 overflow-y-auto min-h-0 scrollbar-thin scrollbar-thumb-white/10 pr-2 flex flex-col">
               {activeTab === 'text' && (
                 <textarea
                   value={editContent}
                   onChange={(e) => setEditContent(e.target.value)}
                   placeholder="Write something... Use Markdown, paste commands, or generic text."
-                  className="w-full h-full bg-transparent text-gray-300 font-mono text-sm leading-relaxed resize-none focus:outline-none"
+                  className="flex-1 w-full h-full min-h-[300px] bg-transparent text-gray-300 font-mono text-sm leading-relaxed resize-none focus:outline-none"
                 />
               )}
 
