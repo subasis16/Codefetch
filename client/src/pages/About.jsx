@@ -27,7 +27,7 @@ const About = () => {
               <p className="text-orange-500 font-bold mb-6 font-mono text-base">Founder & Full Stack Developer</p>
 
               <p className="text-gray-600 mb-8 leading-relaxed text-lg">
-                Building CodeRef from ground up — designing, coding, and shipping every feature. Passionate about creating technology that empowers developers and streamlines their workflow.
+                Building CodeFetch from ground up — designing, coding, and shipping every feature. Passionate about creating technology that empowers developers and streamlines their workflow.
               </p>
 
               <div className="flex flex-wrap gap-4 justify-center md:justify-start mb-8">

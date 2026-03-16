@@ -110,7 +110,7 @@ const Dashboard = () => {
                             <p className="text-ossium-muted text-[10px] font-bold uppercase tracking-wider">Access</p>
                           </div>
                           <p className="text-xl font-bold text-white leading-tight">Unlimited</p>
-                          <p className="text-[10px] text-ossium-muted mt-1">CodeRef is 100% Free</p>
+                          <p className="text-[10px] text-ossium-muted mt-1">CodeFetch is 100% Free</p>
                         </div>
 
                         {/* Last Seen Card */}

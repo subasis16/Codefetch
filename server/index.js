@@ -14,7 +14,7 @@ app.use(express.json());
 // const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_KEY);
 
 app.get('/', (req, res) => {
-  res.send('CodeRef Server is running');
+  res.send('CodeFetch Server is running');
 });
 
 // Example protected route using Supabase Auth (token verification would go here)

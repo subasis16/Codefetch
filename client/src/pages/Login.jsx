@@ -143,13 +143,13 @@ const Login = () => {
               className="w-full flex items-center justify-center gap-2 bg-[#24292e] hover:bg-[#2f363d] text-white font-medium py-2.5 px-4 rounded-xl transition-all duration-300 border border-white/5 hover:border-white/20 text-sm"
             >
               <FaGithub size={18} />
-              <span>Continue with GitHub</span>
+              <span>Login to CodeFetch with GitHub</span>
             </button>
           </div>
 
           <div className="mt-8 pt-6 border-t border-white/5 text-center px-4">
             <p className="text-[10px] text-ossium-muted leading-relaxed">
-              By continuing, you agree to CodeRef's <Link to="/terms" className="underline hover:text-white">Terms of Service</Link> and <Link to="/privacy" className="underline hover:text-white">Privacy Policy</Link>.
+              By continuing, you agree to CodeFetch's <Link to="/terms" className="underline hover:text-white">Terms of Service</Link> and <Link to="/privacy" className="underline hover:text-white">Privacy Policy</Link>.
             </p>
           </div>
         </div>

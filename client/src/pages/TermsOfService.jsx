@@ -16,7 +16,7 @@ const TermsOfService = () => {
           <section>
             <h2 className="text-2xl font-bold text-white mb-4">1. Agreement to Terms</h2>
             <p>
-              By accessing and using CodeRef, you accept and agree to be bound by the terms and provision of this agreement.
+              By accessing and using CodeFetch, you accept and agree to be bound by the terms and provision of this agreement.
               In addition, when using these particular services, you shall be subject to any posted guidelines or rules applicable to such services.
             </p>
           </section>
@@ -24,8 +24,8 @@ const TermsOfService = () => {
           <section>
             <h2 className="text-2xl font-bold text-white mb-4">2. Description of Service</h2>
             <p>
-              CodeRef provides users with access to a collection of resources, including developer cheat sheets, language guides, and tools.
-              You understand and agree that the Service is provided "AS-IS" and that CodeRef assumes no responsibility for the timeliness, deletion, mis-delivery or failure to store any user communications or personalization settings.
+              CodeFetch provides users with access to a collection of resources, including developer cheat sheets, language guides, and tools.
+              You understand and agree that the Service is provided "AS-IS" and that CodeFetch assumes no responsibility for the timeliness, deletion, mis-delivery or failure to store any user communications or personalization settings.
             </p>
           </section>
 
@@ -39,7 +39,7 @@ const TermsOfService = () => {
           <section>
             <h2 className="text-2xl font-bold text-white mb-4">4. Intellectual Property</h2>
             <p>
-              All content included on this site, such as text, graphics, logos, button icons, images, is the property of CodeRef or its content suppliers and protected by international copyright laws.
+              All content included on this site, such as text, graphics, logos, button icons, images, is the property of CodeFetch or its content suppliers and protected by international copyright laws.
             </p>
           </section>
 

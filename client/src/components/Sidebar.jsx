@@ -41,7 +41,7 @@ const Sidebar = ({ activeTab, onTabChange, isOpen, onClose }) => {
                 <path d="M10 9H8" stroke="#0a0a0a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </div>
-            <span className="font-bold text-white text-lg tracking-tight">Code Ref</span>
+            <span className="font-bold text-white text-lg tracking-tight">CodeFetch</span>
           </Link>
         </div>
 

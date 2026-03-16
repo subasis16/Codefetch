@@ -14,7 +14,7 @@ const Footer = () => {
                 <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" stroke="#0a0a0a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </div>
-            <span className="text-white font-bold text-lg">Code Ref</span>
+            <span className="text-white font-bold text-lg">CodeFetch</span>
           </Link>
           <p className="text-ossium-muted max-w-sm mb-6">
             The developer companion. Recall syntax, patterns, and docs in seconds. Built for the modern web.
@@ -49,7 +49,7 @@ const Footer = () => {
       </div>
 
       <div className="max-w-7xl mx-auto mt-12 sm:mt-16 pt-6 sm:pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-xs text-ossium-muted gap-4">
-        <p>&copy; {new Date().getFullYear()} Code Ref. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} CodeFetch. All rights reserved.</p>
         <div className="flex gap-6">
           <Link to="/about" className="hover:text-white transition-colors">About</Link>
           <Link to="/privacy" className="hover:text-white transition-colors">Privacy</Link>

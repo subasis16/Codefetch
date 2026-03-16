@@ -38,7 +38,7 @@ const Navbar = () => {
             <path d="M10 9H8" stroke="#0a0a0a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </div>
-        <span className="text-white font-bold text-xl tracking-tight">Code Ref</span>
+        <span className="text-white font-bold text-xl tracking-tight">CodeFetch</span>
       </Link>
 
       {/* Centered Desktop Navigation - Absolute positioning for strict centering */}
