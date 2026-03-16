@@ -84,56 +84,34 @@ const Dashboard = () => {
 
           {/* User Profile / Dashboard Home */}
           {currentTab === 'dashboard' && (
-            <div className="flex flex-col items-center justify-center py-12">
+            <div className="flex flex-col items-center justify-center py-10">
               {user ? (
-                <div className="bg-[#121212] border border-white/5 rounded-2xl p-8 md:p-12 w-full max-w-4xl backdrop-blur-sm transition-all duration-300">
-                  <div className="flex flex-col md:flex-row gap-12 items-center md:items-start">
-                    {/* Left side: Avatar & Welcome */}
-                    <div className="flex flex-col items-center gap-4 min-w-[200px]">
-                      <div className="w-24 h-24 rounded-2xl bg-[#0a0a0a] border-2 border-ossium-accent shadow-[0_0_20px_rgba(202,255,51,0.2)] flex items-center justify-center text-4xl font-black text-white/90">
-                        {user.email?.charAt(0).toUpperCase()}
-                      </div>
-                      <div className="text-center">
-                        <h2 className="text-3xl font-bold text-white tracking-tight">Welcome back</h2>
-                        <div className="flex items-center gap-2 justify-center mt-1">
-                          <p className="text-ossium-muted text-sm font-medium">{user.email}</p>
-                        </div>
+                <div className="w-full max-w-4xl space-y-12">
+                  {/* Classic Profile Header */}
+                  <div className="flex flex-col md:flex-row items-center gap-8 pb-12 border-b border-white/5">
+                    <div className="w-32 h-32 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-4xl font-light text-white overflow-hidden shadow-2xl">
+                      {user.email?.charAt(0).toUpperCase()}
+                    </div>
+                    <div className="text-center md:text-left space-y-1">
+                      <p className="text-white/40 font-mono text-sm tracking-widest">{user.email}</p>
+                    </div>
+                  </div>
+
+                  {/* Clean Info Grid */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="space-y-2">
+                      <p className="text-[10px] font-black uppercase tracking-[0.3em] text-white/30">Last Active Session</p>
+                      <div className="flex items-baseline gap-3">
+                        <span className="text-2xl font-bold text-white">{new Date(user.last_sign_in_at).toLocaleDateString()}</span>
+                        <span className="text-sm font-mono text-white/40">{new Date(user.last_sign_in_at).toLocaleTimeString()}</span>
                       </div>
                     </div>
 
-                    {/* Right side: Information Grid */}
-                    <div className="flex-1 w-full flex flex-col gap-4">
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        {/* Access Card */}
-                        <div className="bg-[#1A1A1A] border border-white/5 rounded-xl p-5 group">
-                          <div className="flex items-start justify-between mb-2">
-                            <p className="text-ossium-muted text-[10px] font-bold uppercase tracking-wider">Access</p>
-                          </div>
-                          <p className="text-xl font-bold text-white leading-tight">Unlimited</p>
-                          <p className="text-[10px] text-ossium-muted mt-1">CodeFetch is 100% Free</p>
-                        </div>
-
-                        {/* Last Seen Card */}
-                        <div className="bg-[#1A1A1A] border border-white/5 rounded-xl p-5 group">
-                          <div className="flex items-start justify-between mb-2">
-                            <p className="text-ossium-muted text-[10px] font-bold uppercase tracking-wider">Last Seen</p>
-                          </div>
-                          <p className="text-xl font-bold text-white leading-tight">{new Date(user.last_sign_in_at).toLocaleDateString()}</p>
-                          <p className="text-[10px] text-ossium-muted mt-1">{new Date(user.last_sign_in_at).toLocaleTimeString()}</p>
-                        </div>
-                      </div>
-
-                      {/* User ID Section */}
-                      <div className="bg-[#1A1A1A] border border-white/5 rounded-xl p-5 mt-auto">
-                        <div className="flex items-center justify-between gap-4">
-                          <div className="flex-1 min-w-0">
-                            <p className="text-ossium-muted text-[10px] font-bold uppercase tracking-wider mb-2">User ID</p>
-                            <div className="bg-black/40 border border-white/5 rounded px-3 py-1.5 overflow-hidden">
-                              <p className="font-mono text-[11px] text-white/50 truncate select-all">{user.id}</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                    <div className="space-y-2">
+                      <p className="text-[10px] font-black uppercase tracking-[0.3em] text-white/30">Unique Identifier</p>
+                      <p className="font-mono text-xs text-white/60 bg-white/5 px-4 py-2 rounded-lg border border-white/5 break-all">
+                        {user.id}
+                      </p>
                     </div>
                   </div>
                 </div>

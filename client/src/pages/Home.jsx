@@ -10,7 +10,7 @@ function Home() {
   return (
     <>
       <Navbar />
-      <main>
+      <main className="bg-black">
         <Hero />
         <CategoryCards />
         <Workflow />

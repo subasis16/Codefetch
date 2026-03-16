@@ -245,10 +245,7 @@ const notesData = {
 const LanguageNotes = () => {
   const { id } = useParams();
   const langKey = id.toLowerCase().replace('c++', 'cpp').replace('.', '');
-  // Mapping special cases if needed.
-  // We will map "Vue.js" -> "vuejs" but our data uses "vuejs" ? no, I need to add more or handle default.
-
-  // Minimal fallback if data is missing
+  
   const data = notesData[langKey] || notesData[langKey.split('-')[0]] || {
     name: id,
     icon: <FiCode />,
@@ -262,24 +259,24 @@ const LanguageNotes = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#050505] text-gray-300 font-sans flex flex-col selection:bg-[#caff33] selection:text-black">
+    <div className="min-h-screen bg-black text-white font-sans flex flex-col selection:bg-white selection:text-black">
       <Navbar />
 
-      <main className="flex-1 pt-32 px-6 pb-20 w-full max-w-5xl mx-auto">
-        <Link to="/languages" className="inline-flex items-center gap-2 text-gray-500 hover:text-[#caff33] mb-8 transition-colors group">
+      <main className="flex-1 pt-32 sm:pt-40 px-4 sm:px-6 pb-20 w-full max-w-5xl mx-auto">
+        <Link to="/languages" className="inline-flex items-center gap-2 text-white/30 hover:text-white mb-8 sm:mb-12 transition-all group text-xs sm:text-sm font-bold uppercase tracking-widest">
           <FiArrowLeft className="group-hover:-translate-x-1 transition-transform" /> Back to Languages
         </Link>
 
-        {/* Header */}
-        <div className="flex items-start gap-6 mb-12 border-b border-white/5 pb-12">
-          <div className={`p-6 rounded-2xl bg-[#111] border border-white/10 ${data.color} text-5xl shadow-2xl shadow-${data.color.split('-')[1]}-500/10`}>
+        {/* Header Section */}
+        <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 sm:gap-10 mb-16 sm:mb-24 border-b border-white/5 pb-10 sm:pb-16 text-center sm:text-left">
+          <div className={`p-6 sm:p-8 rounded-[2rem] bg-white/5 border border-white/10 ${data.color} text-5xl sm:text-7xl shadow-2xl shrink-0`}>
             {data.icon}
           </div>
-          <div>
-            <h1 className="text-4xl md:text-6xl font-black mb-4 tracking-tight text-white">
-              {data.name} <span className="text-[#caff33] text-2xl font-normal align-top">Notes</span>
+          <div className="flex-1">
+            <h1 className="text-4xl sm:text-7xl font-black mb-4 tracking-tighter leading-tight">
+              {data.name} <span className="text-white/20 block sm:inline">Notes</span>
             </h1>
-            <p className="text-xl text-gray-400 leading-relaxed max-w-2xl">
+            <p className="text-lg sm:text-xl text-white/40 leading-relaxed max-w-2xl font-medium">
               {data.description}
             </p>
           </div>
@@ -287,41 +284,41 @@ const LanguageNotes = () => {
 
         {/* Content Sections */}
         {data.sections.length > 0 ? (
-          <div className="space-y-16">
-            {data.sections.map((section, index) => (
-              <div key={index} className="group relative">
-                {/* Vertical connecting line for timeline effect */}
-                {index !== data.sections.length - 1 && (
-                  <div className="absolute left-[24px] top-12 bottom-[-64px] w-px bg-white/10 group-hover:bg-[#caff33]/30 transition-colors pointer-events-none" />
-                )}
+          <div className="relative space-y-20 sm:space-y-32">
+            {/* Vertical connecting line */}
+            <div className="absolute left-[24px] sm:left-[32px] top-8 bottom-8 w-[1px] bg-gradient-to-b from-white/20 via-white/5 to-transparent pointer-events-none" />
 
-                <div className="flex items-start gap-4 md:gap-6 mb-4">
-                  <div className="w-12 h-12 rounded-xl bg-[#1a1a1a] border border-white/10 text-ossium-accent flex items-center justify-center font-mono font-bold text-lg shrink-0 group-hover:border-ossium-accent/50 group-hover:scale-110 transition-all duration-300 shadow-lg z-10">
+            {data.sections.map((section, index) => (
+              <div key={index} className="relative group">
+                <div className="flex items-start gap-4 sm:gap-10">
+                  {/* Timeline Number */}
+                  <div className="relative z-10 w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-black border border-white/10 flex items-center justify-center font-mono font-black text-sm sm:text-lg text-white/20 shrink-0 group-hover:border-white/40 group-hover:text-white transition-all duration-500 shadow-2xl">
                     {index + 1 < 10 ? `0${index + 1}` : index + 1}
                   </div>
-                  <div className="flex-1 pt-1 min-w-0">
-                    <h2 className="text-3xl font-bold text-white mb-4 group-hover:text-ossium-accent transition-colors">
+
+                  <div className="flex-1 pt-2 sm:pt-4 min-w-0">
+                    <h2 className="text-2xl sm:text-4xl font-black text-white mb-4 sm:mb-6 group-hover:translate-x-1 transition-transform duration-500 tracking-tight">
                       {section.title}
                     </h2>
 
-                    <p className="text-gray-300 mb-8 text-lg leading-relaxed max-w-4xl">
+                    <p className="text-white/60 mb-8 sm:mb-10 text-base sm:text-lg leading-relaxed max-w-3xl font-medium">
                       {section.content}
                     </p>
 
                     {section.code && (
-                      <div className="rounded-xl overflow-hidden border border-white/10 bg-[#0c0c0c] shadow-2xl group-hover:border-white/20 transition-all duration-300">
+                      <div className="rounded-2xl overflow-hidden border border-white/5 bg-[#0a0a0a] shadow-[0_32px_64px_-12px_rgba(0,0,0,0.8)] group-hover:border-white/10 transition-all duration-500">
                         {/* Terminal Header */}
-                        <div className="flex items-center justify-between px-4 py-3 bg-white/5 border-b border-white/5">
+                        <div className="flex items-center justify-between px-5 py-3.5 bg-white/[0.02] border-b border-white/5">
                           <div className="flex gap-2">
-                            <div className="w-3 h-3 rounded-full bg-[#FF5F56] border border-[#E0443E]/50" />
-                            <div className="w-3 h-3 rounded-full bg-[#FFBD2E] border border-[#DEA123]/50" />
-                            <div className="w-3 h-3 rounded-full bg-[#27C93F] border border-[#1AAB29]/50" />
+                            <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
+                            <div className="w-2.5 h-2.5 rounded-full bg-white/5" />
+                            <div className="w-2.5 h-2.5 rounded-full bg-white/5" />
                           </div>
-                          <span className="text-xs font-mono text-white/30 uppercase tracking-widest">Snippet</span>
+                          <span className="text-[10px] font-black text-white/20 uppercase tracking-[0.2em]">Code Example</span>
                         </div>
 
-                        <div className="p-6 overflow-x-auto">
-                          <pre className="font-mono text-sm text-gray-200 leading-loose">
+                        <div className="p-6 sm:p-8 overflow-x-auto no-scrollbar">
+                          <pre className="font-mono text-xs sm:text-sm text-white/80 leading-relaxed">
                             <code>{section.code}</code>
                           </pre>
                         </div>
@@ -333,15 +330,14 @@ const LanguageNotes = () => {
             ))}
           </div>
         ) : (
-          <div className="bg-[#111] border border-white/5 rounded-xl p-16 text-center">
-            <FiTerminal className="mx-auto text-gray-700 mb-6" size={64} />
-            <h3 className="text-2xl font-bold text-white mb-2">Content Under Development</h3>
-            <p className="text-gray-500 max-w-md mx-auto">
-              We are working on detailed notes for {data.name}. This section will be updated soon with examples and best practices.
+          <div className="bg-white/5 border border-white/5 rounded-[2rem] p-12 sm:p-20 text-center">
+            <FiTerminal className="mx-auto text-white/10 mb-8" size={64} />
+            <h3 className="text-2xl sm:text-3xl font-black text-white mb-4">Documentation Pending</h3>
+            <p className="text-white/30 max-w-md mx-auto font-medium">
+              We're currently compiling the master notes for {data.name}. Check back soon for deep dives and patterns.
             </p>
           </div>
         )}
-
       </main>
       <Footer />
     </div>

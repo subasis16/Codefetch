@@ -78,7 +78,7 @@ const Login = () => {
 
           <form onSubmit={handleAuth} className="space-y-4 mb-6">
             {successMessage && (
-              <div className="bg-green-500/10 border border-green-500/50 text-green-500 p-3 rounded-lg text-sm text-center">
+              <div className="bg-gray-500/10 border border-gray-500/50 text-gray-500 p-3 rounded-lg text-sm text-center">
                 {successMessage}
               </div>
             )}

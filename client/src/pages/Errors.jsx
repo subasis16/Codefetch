@@ -21,7 +21,7 @@ const Errors = () => {
   // Helper for badges
   const getLevelColor = (level) => {
     switch (level) {
-      case 'Beginner': return 'bg-green-500/10 text-green-400 border-green-500/20';
+      case 'Beginner': return 'bg-gray-500/10 text-gray-400 border-gray-500/20';
       case 'Intermediate': return 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20';
       case 'Advanced': return 'bg-orange-500/10 text-orange-400 border-orange-500/20';
       case 'Expert': return 'bg-red-500/10 text-red-400 border-red-500/20';
@@ -119,7 +119,7 @@ const Errors = () => {
                   <h3 className="text-xs font-bold text-ossium-accent uppercase tracking-widest mb-2 flex items-center gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-ossium-accent"></span> The Fix
                   </h3>
-                  <div className="bg-ossium-accent/10 border border-ossium-accent/20 rounded-lg p-3 font-mono text-xs text-green-100 leading-relaxed shadow-sm">
+                  <div className="bg-ossium-accent/10 border border-ossium-accent/20 rounded-lg p-3 font-mono text-xs text-gray-100 leading-relaxed shadow-sm">
                     &gt; {item.fix}
                   </div>
                 </div>

@@ -108,7 +108,7 @@ const ProjectCard = ({ project }) => {
                     <SectionHeader icon={FiCreditCard} title="Monetization Logic" />
                     <div className="bg-white/5 border border-white/5 p-5 rounded-xl">
                       <div className="flex items-center gap-3 mb-3">
-                        <div className="p-2 bg-green-500/10 rounded-lg text-green-400">
+                        <div className="p-2 bg-gray-500/10 rounded-lg text-gray-400">
                           <FiActivity />
                         </div>
                         <span className="font-bold text-white">{project.payment.provider}</span>
@@ -140,7 +140,7 @@ const ProjectCard = ({ project }) => {
                   <div className="absolute top-0 left-0 right-0 h-10 bg-white/5 rounded-t-xl border-b border-white/5 flex items-center px-4 gap-2 z-10">
                     <div className="w-3 h-3 rounded-full bg-red-500/80" />
                     <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-                    <div className="w-3 h-3 rounded-full bg-green-500/80" />
+                    <div className="w-3 h-3 rounded-full bg-gray-500/80" />
                     <div className="ml-auto text-[10px] font-mono text-ossium-muted">explorer</div>
                   </div>
 
@@ -176,7 +176,7 @@ const Roadmap = () => {
               Architecture Patterns
             </div>
             <h1 className="text-5xl md:text-7xl font-black text-white mb-6 tracking-tight animate-fade-in-up leading-tight">
-              Project <span className="text-transparent bg-clip-text bg-gradient-to-r from-ossium-accent to-emerald-400">Blueprints</span>
+              Project <span className="text-transparent bg-clip-text bg-gradient-to-r from-ossium-accent to-gray-400">Blueprints</span>
             </h1>
             <p className="text-ossium-muted text-lg md:text-xl max-w-2xl mx-auto leading-relaxed animate-fade-in-up delay-100">
               Dissecting modern web applications. Explore the full-stack architecture, file systems, and integration patterns of production-grade software.

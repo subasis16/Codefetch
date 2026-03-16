@@ -46,7 +46,7 @@ const Workflow = () => {
             <div className="flex items-center gap-2 mb-4 border-b border-white/5 pb-4">
               <div className="w-3 h-3 rounded-full bg-red-500/50"></div>
               <div className="w-3 h-3 rounded-full bg-yellow-500/50"></div>
-              <div className="w-3 h-3 rounded-full bg-green-500/50"></div>
+              <div className="w-3 h-3 rounded-full bg-gray-500/50"></div>
               <div className="ml-auto text-xs text-ossium-muted font-mono">search.tsx</div>
             </div>
 
@@ -63,7 +63,7 @@ const Workflow = () => {
                 <span className="text-pink-500">return</span>
                 <span className="text-white ml-2">(</span>
               </div>
-              <div className="pl-8 text-green-400">
+              <div className="pl-8 text-gray-400">
                 &lt;FlowState speed={'{100}'} /&gt;
               </div>
               <div className="pl-4 text-white">);</div>

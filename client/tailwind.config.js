@@ -13,8 +13,8 @@ export default {
           card: '#121212',
           text: '#f5f5f5',
           muted: '#a1a1aa',
-          accent: '#caff33', // Green/Yellow accent
-          'accent-hover': '#b2e62d',
+          accent: '#f9fafb', // Grey accent
+          'accent-hover': '#e5e7eb',
         }
       },
       fontFamily: {

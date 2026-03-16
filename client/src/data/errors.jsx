@@ -404,7 +404,7 @@ export const errorsData = [
     cause: "Memory leak or process requires more RAM.",
     fix: "Increase max old space: node --max-old-space-size=4096 app.js.",
     icon: <SiNodedotjs />,
-    color: 'text-green-500'
+    color: 'text-gray-500'
   },
 
   // --- Git ---

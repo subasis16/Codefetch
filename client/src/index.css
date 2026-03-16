@@ -39,7 +39,7 @@
 
 /* Fluid Gradient Animation - Visible Colors */
 .bg-fluid-aurora {
-  background: radial-gradient(circle at 50% 50%, rgba(202, 255, 51, 0.15), transparent 60%),
+  background: radial-gradient(circle at 50% 50%, rgba(249, 250, 251, 0.15), transparent 60%),
     radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.15), transparent 50%);
   filter: blur(80px);
   animation: aurora-move 8s ease-in-out infinite alternate;
