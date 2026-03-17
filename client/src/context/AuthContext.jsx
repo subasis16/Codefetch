@@ -34,7 +34,10 @@ export const AuthProvider = ({ children }) => {
     signInWithGithub: async () => {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'github',
-      })
+        options: {
+          redirectTo: `${window.location.origin}/dashboard`,
+        },
+      });
       if (error) console.error("Error signing in with Github:", error);
     },
 
@@ -56,6 +59,20 @@ export const AuthProvider = ({ children }) => {
       });
       if (error) console.error("Sign up error:", error);
       else console.log("Sign up success:", data);
+      return { error, data };
+    },
+    resetPassword: async (email) => {
+      const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/reset-password`,
+      });
+      if (error) console.error("Password reset error:", error);
+      return { error, data };
+    },
+    updatePassword: async (newPassword) => {
+      const { data, error } = await supabase.auth.updateUser({
+        password: newPassword,
+      });
+      if (error) console.error("Update password error:", error);
       return { error, data };
     },
     signOut: async () => {
