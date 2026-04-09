@@ -5,10 +5,12 @@ import CategoryCards from '../components/CategoryCards';
 import Workflow from '../components/Workflow';
 import CoreConceptsOverview from '../components/CoreConceptsOverview';
 import Footer from '../components/Footer';
+import SEO from '../components/SEO';
 
 function Home() {
   return (
     <>
+      <SEO title="Home" />
       <Navbar />
       <main className="bg-black">
         <Hero />

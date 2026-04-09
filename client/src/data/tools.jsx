@@ -11,7 +11,7 @@ export const toolsData = [
   {
     id: 1,
     name: 'Postman',
-    icon: <SiPostman />,
+    icon: <SiPostman className="text-[#FF6C37]" />,
     category: 'API Testing',
     desc: 'Platform for building and using APIs. Simplifies each step of the lifecycle.',
     install: 'Download desktop app',
@@ -21,7 +21,7 @@ export const toolsData = [
   {
     id: 2,
     name: 'ESLint',
-    icon: <SiEslint />,
+    icon: <SiEslint className="text-[#4B32C3]" />,
     category: 'Linter',
     desc: 'Statically analyzes your code to quickly find problems.',
     install: 'npm install eslint --save-dev',
@@ -31,7 +31,7 @@ export const toolsData = [
   {
     id: 3,
     name: 'Prettier',
-    icon: <SiPrettier />,
+    icon: <SiPrettier className="text-[#F7B93E]" />,
     category: 'Formatter',
     desc: 'An opinionated code formatter that supports many languages.',
     install: 'npm i -D prettier',
@@ -41,7 +41,7 @@ export const toolsData = [
   {
     id: 4,
     name: 'Docker Desktop',
-    icon: <SiDocker />,
+    icon: <SiDocker className="text-[#2496ED]" />,
     category: 'DevOps',
     desc: 'The fastest way to containerize applications.',
     install: 'Download from docker.com',
@@ -51,7 +51,7 @@ export const toolsData = [
   {
     id: 5,
     name: 'GitLens',
-    icon: <SiGit />,
+    icon: <SiGit className="text-[#F05032]" />,
     category: 'VS Code Extension',
     desc: 'Supercharge Git inside VS Code. Visualize code authorship.',
     install: 'Install from Marketplace',
@@ -61,7 +61,7 @@ export const toolsData = [
   {
     id: 8,
     name: 'Figma',
-    icon: <SiFigma />,
+    icon: <SiFigma className="text-[#F24E1E]" />,
     category: 'Design',
     desc: 'The collaborative interface design tool.',
     install: 'Web or Desktop App',
@@ -71,7 +71,7 @@ export const toolsData = [
   {
     id: 9,
     name: 'VS Code',
-    icon: <FiCode />,
+    icon: <FiCode className="text-[#007ACC]" />,
     category: 'Editor',
     desc: 'Code editing. Redefined. The world\'s best editor.',
     install: 'code.visualstudio.com',
@@ -81,7 +81,7 @@ export const toolsData = [
   {
     id: 10,
     name: 'Vim',
-    icon: <SiVim />,
+    icon: <SiVim className="text-[#019733]" />,
     category: 'Editor',
     desc: 'Highly configurable text editor built to make creating text efficient.',
     install: 'sudo apt install vim',
@@ -91,7 +91,7 @@ export const toolsData = [
   {
     id: 11,
     name: 'Chrome DevTools',
-    icon: <FiGlobe />,
+    icon: <FiGlobe className="text-[#4285F4]" />,
     category: 'Debug',
     desc: 'Set of web developer tools built directly into the browser.',
     install: 'Pre-installed',
@@ -101,7 +101,7 @@ export const toolsData = [
   {
     id: 12,
     name: 'Insomnia',
-    icon: <FiMoon />,
+    icon: <FiMoon className="text-[#4000BF]" />,
     category: 'API Client',
     desc: 'The open-source, cross-platform API client for GraphQL/REST.',
     install: 'Download from insomnia.rest',
@@ -111,7 +111,7 @@ export const toolsData = [
   {
     id: 13,
     name: 'MongoDB Compass',
-    icon: <SiMongodb />,
+    icon: <SiMongodb className="text-[#47A248]" />,
     category: 'GUI',
     desc: 'The GUI for MongoDB. Visually explore your data.',
     install: 'Download from mongodb.com',
@@ -121,7 +121,7 @@ export const toolsData = [
   {
     id: 14,
     name: 'K8s Lens',
-    icon: <SiKubernetes />,
+    icon: <SiKubernetes className="text-[#326CE5]" />,
     category: 'DevOps GUI',
     desc: 'The Kubernetes IDE. Monitor clusters in real-time.',
     install: 'Download from k8slens.dev',
@@ -131,7 +131,7 @@ export const toolsData = [
   {
     id: 15,
     name: 'Oh My Zsh',
-    icon: <FiTerminal />,
+    icon: <FiTerminal className="text-[#FF5E00]" />,
     category: 'Terminal',
     desc: 'A framework for managing your Zsh configuration.',
     install: 'sh -c "$(curl -fsSL...)"',
@@ -141,7 +141,7 @@ export const toolsData = [
   {
     id: 16,
     name: 'Vite',
-    icon: <FiZap />,
+    icon: <FiZap className="text-[#646CFF]" />,
     category: 'Build Tool',
     desc: 'Next Generation Frontend Tooling. Instant Server Start.',
     install: 'npm create vite@latest',

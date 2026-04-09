@@ -72,7 +72,7 @@ const Tools = () => {
 
               <div className="flex items-start justify-between mb-6">
                 <div className="flex items-center gap-4">
-                  <div className="p-3 rounded-lg bg-white/5 text-3xl text-ossium-accent group-hover:bg-ossium-accent/10 transition-colors">
+                  <div className="p-3 rounded-lg bg-white/5 flex items-center justify-center text-3xl group-hover:bg-white/10 transition-colors">
                     {item.icon}
                   </div>
                   <div>

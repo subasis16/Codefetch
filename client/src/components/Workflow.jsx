@@ -10,22 +10,19 @@ const Workflow = () => {
 
         {/* Text Content */}
         <div className="flex-1 space-y-8">
-          <div className="inline-block px-3 py-1 rounded-full bg-ossium-accent/10 text-ossium-accent text-xs font-bold uppercase tracking-wider">
-            Workflow
-          </div>
           <h2 className="text-4xl md:text-5xl font-black text-white leading-tight">
-            Built for <span className="text-transparent bg-clip-text bg-gradient-to-r from-ossium-accent to-yellow-200">Vibe Coders</span>.
+            Built for <span className="text-transparent bg-clip-text bg-gradient-to-r from-ossium-accent to-white/50">Vibe Coders</span>.
           </h2>
-          <p className="text-lg text-ossium-muted leading-relaxed">
-            Stay in the flow. Our command-k interface and instant search allow you to find the exact syntax you need without ever leaving your keyboard. Designed for high-velocity engineering teams.
+          <p className="text-lg text-ossium-muted leading-relaxed font-light">
+            Designed for high-velocity engineering. Access comprehensive documentation, troubleshoot errors instantly, and maintain your personal knowledge base—all in one secure platform.
           </p>
 
           <ul className="space-y-4 pt-4">
             {[
-              'Instant search with Command+K',
-              'Dark mode optimized for long sessions',
-              'Copy code snippets with one keystroke',
-              'Offline support for all documentation'
+              'Comprehensive Syntax Cheat Sheets',
+              'Common Bugs & Fixes Database',
+              'Personal Cloud Developer Notes',
+              'Architecture Blueprints & Roadmaps'
             ].map((item, i) => (
               <li key={i} className="flex items-center gap-3 text-ossium-muted hover:text-white transition-colors">
                 <div className="h-5 w-5 rounded-full bg-ossium-accent/20 flex items-center justify-center">

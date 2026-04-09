@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Sidebar from '../components/Sidebar';
 import Notes from '../components/Notes';
-import { SiTailwindcss, SiReact, SiNodedotjs, SiPython } from 'react-icons/si';
+import { SiTailwindcss, SiReact, SiNodedotjs, SiPython, SiTypescript, SiDocker, SiGit, SiMongodb, SiGo, SiRust, SiGraphql } from 'react-icons/si';
 import { FiSearch, FiBook, FiLayout, FiZap, FiMenu, FiUser, FiLogOut, FiShield, FiClock } from 'react-icons/fi';
 import { useLocation, Link, Navigate } from 'react-router-dom';
 import { useAuth } from '../context/useAuth';
@@ -24,14 +24,21 @@ const Dashboard = () => {
   }, [location.state, location.pathname]);
 
   const documentationLinks = [
-    { name: 'Tailwind CSS', url: 'https://tailwindcss.com/docs', icon: <SiTailwindcss />, desc: 'Utility-first CSS framework.' },
-    { name: 'React', url: 'https://react.dev', icon: <SiReact />, desc: 'The library for web and native user interfaces.' },
-    { name: 'Node.js', url: 'https://nodejs.org/en/docs', icon: <SiNodedotjs />, desc: 'JavaScript runtime built on Chrome\'s V8 engine.' },
-    { name: 'Vite', url: 'https://vitejs.dev/guide/', icon: <FiZap />, desc: 'Next Generation Frontend Tooling.' },
-    { name: 'Next.js', url: 'https://nextjs.org/docs', icon: <FiLayout />, desc: 'The React Framework for the Web.' },
-    { name: 'Vue.js', url: 'https://vuejs.org/guide/introduction.html', icon: <FiLayout />, desc: 'The Progressive JavaScript Framework.' },
-    { name: 'Python', url: 'https://docs.python.org/3/', icon: <SiPython />, desc: 'The Python Language Reference.' },
-    { name: 'MDN Web Docs', url: 'https://developer.mozilla.org', icon: <FiBook />, desc: 'Resources for developers, by developers.' },
+    { name: 'Tailwind CSS', url: 'https://tailwindcss.com/docs', icon: <SiTailwindcss className="text-[#06B6D4]" />, desc: 'Utility-first CSS framework.' },
+    { name: 'React', url: 'https://react.dev', icon: <SiReact className="text-[#61DAFB]" />, desc: 'The library for web and native user interfaces.' },
+    { name: 'Node.js', url: 'https://nodejs.org/en/docs', icon: <SiNodedotjs className="text-[#339933]" />, desc: 'JavaScript runtime built on Chrome\'s V8 engine.' },
+    { name: 'Vite', url: 'https://vitejs.dev/guide/', icon: <FiZap className="text-[#646CFF]" />, desc: 'Next Generation Frontend Tooling.' },
+    { name: 'Next.js', url: 'https://nextjs.org/docs', icon: <FiLayout className="text-white" />, desc: 'The React Framework for the Web.' },
+    { name: 'Vue.js', url: 'https://vuejs.org/guide/introduction.html', icon: <FiLayout className="text-[#4FC08D]" />, desc: 'The Progressive JavaScript Framework.' },
+    { name: 'Python', url: 'https://docs.python.org/3/', icon: <SiPython className="text-[#3776AB]" />, desc: 'The Python Language Reference.' },
+    { name: 'MDN Web Docs', url: 'https://developer.mozilla.org', icon: <FiBook className="text-white" />, desc: 'Resources for developers, by developers.' },
+    { name: 'TypeScript', url: 'https://www.typescriptlang.org/docs/', icon: <SiTypescript className="text-[#3178C6]" />, desc: 'Typed JavaScript at Any Scale.' },
+    { name: 'Docker', url: 'https://docs.docker.com/', icon: <SiDocker className="text-[#2496ED]" />, desc: 'Platform for developing, shipping, and running applications.' },
+    { name: 'Git', url: 'https://git-scm.com/doc', icon: <SiGit className="text-[#F05032]" />, desc: 'Free and open source distributed version control system.' },
+    { name: 'MongoDB', url: 'https://www.mongodb.com/docs/', icon: <SiMongodb className="text-[#47A248]" />, desc: 'The developer data platform.' },
+    { name: 'Go', url: 'https://go.dev/doc/', icon: <SiGo className="text-[#00ADD8]" />, desc: 'Open source programming language.' },
+    { name: 'Rust', url: 'https://doc.rust-lang.org/', icon: <SiRust className="text-white" />, desc: 'A language empowering everyone to build reliable software.' },
+    { name: 'GraphQL', url: 'https://graphql.org/learn/', icon: <SiGraphql className="text-[#E10098]" />, desc: 'A query language for your API.' },
   ];
 
   if (!user && currentTab !== 'docs') {
@@ -170,8 +177,8 @@ const Dashboard = () => {
           )}
 
 
-          {/* Notes / Snippets Section */}
-          {(currentTab === 'snippets' || currentTab === 'notes') && (
+          {/* Notes Section */}
+          {currentTab === 'notes' && (
             user ? (
               <Notes />
             ) : (
@@ -181,7 +188,7 @@ const Dashboard = () => {
                 </div>
                 <h2 className="text-2xl font-bold text-white mb-3">Login to access Notes</h2>
                 <p className="text-ossium-muted max-w-md mb-8">
-                  Create, save, and manage your personal coding snippets and cheat sheets securely in the cloud.
+                  Create, save, and manage your personal coding notes and cheat sheets securely in the cloud.
                 </p>
                 <Link
                   to="/login"
@@ -194,7 +201,7 @@ const Dashboard = () => {
           )}
 
           {/* Work in progress placeholder for other tabs */}
-          {currentTab !== 'dashboard' && currentTab !== 'docs' && currentTab !== 'snippets' && currentTab !== 'notes' && (
+          {currentTab !== 'dashboard' && currentTab !== 'docs' && currentTab !== 'notes' && (
             <div className="flex flex-col items-center justify-center py-20 text-ossium-muted">
               <h3 className="text-xl font-bold text-white mb-2">Work in Progress</h3>
               <p>The {currentTab} section is currently under development.</p>

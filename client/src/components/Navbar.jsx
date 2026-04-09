@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FiMenu, FiX, FiArrowRight, FiSearch } from 'react-icons/fi';
+import { FiMenu, FiX } from 'react-icons/fi';
+import { IoSearch } from 'react-icons/io5';
 import { useAuth } from '../context/useAuth';
 import { useSearch } from '../context/SearchContext';
 
@@ -53,22 +54,21 @@ const Navbar = () => {
           {/* Search Trigger (Desktop) */}
           <button 
             onClick={openSearch}
-            className="flex items-center gap-3 px-4 py-2 bg-white/5 border border-white/10 rounded-full hover:bg-white/10 transition-all group"
+            className="flex items-center justify-center p-2 text-white/40 hover:text-white transition-all duration-300 group relative"
+            title="Search (Cmd + K)"
           >
-            <FiSearch className="text-white/40 group-hover:text-white transition-colors" size={14} />
-            <span className="text-[10px] font-black uppercase tracking-widest text-white/20 group-hover:text-white/40 transition-colors">
-              Cmd + K
-            </span>
+            <IoSearch size={22} className="relative z-10 transition-transform duration-300 group-hover:scale-110" />
+            <div className="absolute inset-0 bg-white/10 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
           </button>
 
           <Link
             to={user ? "/dashboard" : "/login"}
-            state={user ? { tab: 'snippets' } : {}}
+            state={user ? { tab: 'notes' } : {}}
             className={`bg-white text-black rounded-full font-black uppercase tracking-[0.2em] hover:bg-gray-200 transition-all shadow-xl flex items-center justify-center
-              ${scrolled ? 'px-6 py-2 text-[9px]' : 'px-8 py-2.5 text-[10px]'}
+              ${scrolled ? 'px-4 py-1.5 text-[8px]' : 'px-6 py-2 text-[9px]'}
             `}
           >
-            {user ? "Snippets" : "Login"}
+            {user ? "My Notes" : "Login"}
           </Link>
         </div>
 
@@ -78,7 +78,7 @@ const Navbar = () => {
           onClick={openSearch}
           className="md:hidden text-white/60 p-2 hover:text-white transition-colors"
         >
-          <FiSearch size={20} />
+          <IoSearch size={22} />
         </button>
 
         {/* Mobile Menu Toggle */}
@@ -114,11 +114,11 @@ const Navbar = () => {
           
           <Link 
             to={user ? "/dashboard" : "/login"} 
-            state={user ? { tab: 'snippets' } : {}} 
+            state={user ? { tab: 'notes' } : {}} 
             className="bg-white text-black px-12 py-4 rounded-full font-black uppercase tracking-widest shadow-[0_0_30px_rgba(255,255,255,0.1)] active:scale-95 transition-transform"
             onClick={() => setMobileMenuOpen(false)}
           >
-            {user ? "Snippets" : "Login"}
+            {user ? "My Notes" : "Login"}
           </Link>
         </div>
       </div>

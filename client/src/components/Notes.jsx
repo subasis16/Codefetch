@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { FiPlus, FiTrash2, FiSave, FiEdit3, FiArrowLeft, FiLink, FiFileText, FiExternalLink } from 'react-icons/fi';
 import { supabase } from '../lib/supabaseClient';
 import { useAuth } from '../context/useAuth';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 const parseContent = (contentRaw) => {
   if (!contentRaw) return { text: '', links: [], pdfUrl: '' };
@@ -33,6 +37,7 @@ const Notes = () => {
   const { user } = useAuth();
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [fetchError, setFetchError] = useState(null);
   const [activeNote, setActiveNote] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [editTitle, setEditTitle] = useState('');
@@ -42,33 +47,65 @@ const Notes = () => {
   const [saving, setSaving] = useState(false);
   
   // UI States
-  const [activeTab, setActiveTab] = useState('text'); // 'text', 'links', 'pdf'
+  const [activeTab, setActiveTab] = useState('text'); // 'text', 'preview', 'links', 'pdf'
   const [newLinkTitle, setNewLinkTitle] = useState('');
   const [newLinkUrl, setNewLinkUrl] = useState('');
 
   useEffect(() => {
+    let isMounted = true;
     const fetchNotes = async () => {
       try {
         setLoading(true);
-        const { data, error } = await supabase
+        setFetchError(null);
+        
+        // Timeout mechanism to prevent infinite loading if Supabase network hangs
+        const fetchPromise = supabase
           .from('notes')
           .select('*')
           .eq('user_id', user.id)
           .order('created_at', { ascending: false });
 
+        const timeoutPromise = new Promise((_, reject) => 
+          setTimeout(() => reject(new Error('Network timeout: Supabase took too long to respond.')), 8000)
+        );
+
+        const { data, error } = await Promise.race([fetchPromise, timeoutPromise]);
+
         if (error) throw error;
-        setNotes(data || []);
+        if (isMounted) setNotes(data || []);
       } catch (error) {
         console.error('Error fetching notes:', error.message);
+        if (isMounted) setFetchError(error.message);
       } finally {
-        setLoading(false);
+        if (isMounted) setLoading(false);
       }
     };
 
     if (user) {
       fetchNotes();
     }
+    return () => { isMounted = false; };
   }, [user]);
+
+  // Auto-save Effect
+  useEffect(() => {
+    if (!isEditing || !activeNote) return;
+
+    const currentParsed = parseContent(activeNote.content);
+    const contentChanged = 
+      editContent !== currentParsed.text || 
+      JSON.stringify(editLinks) !== JSON.stringify(currentParsed.links) ||
+      editPdfUrl !== currentParsed.pdfUrl ||
+      editTitle !== activeNote.title;
+
+    if (!contentChanged) return;
+
+    const timeoutId = setTimeout(() => {
+      handleSaveNote();
+    }, 1500);
+
+    return () => clearTimeout(timeoutId);
+  }, [editTitle, editContent, editLinks, editPdfUrl, isEditing, activeNote]);
 
   const handleCreateNote = async () => {
     try {
@@ -220,6 +257,10 @@ const Notes = () => {
         <div className="flex-1 overflow-y-auto space-y-3 pr-2 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
           {loading ? (
             <div className="text-center py-10 text-ossium-muted text-sm">Loading notes...</div>
+          ) : fetchError ? (
+            <div className="text-center py-10 text-red-400 text-sm border-2 border-dashed border-red-500/20 rounded-xl">
+              Failed to load notes: {fetchError}. Try refreshing.
+            </div>
           ) : notes.length === 0 ? (
             <div className="text-center py-10 text-ossium-muted text-sm border-2 border-dashed border-white/5 rounded-xl">
               No notes yet. Create one!
@@ -316,7 +357,13 @@ const Notes = () => {
                   onClick={() => setActiveTab('text')}
                   className={`px-3 py-1.5 rounded-lg text-sm font-medium flex items-center gap-2 transition-colors whitespace-nowrap ${activeTab === 'text' ? 'bg-ossium-accent/20 text-ossium-accent' : 'text-ossium-muted hover:text-white hover:bg-white/5'}`}
                 >
-                  <FiEdit3 /> Text
+                  <FiEdit3 /> Write
+                </button>
+                <button 
+                  onClick={() => setActiveTab('preview')}
+                  className={`px-3 py-1.5 rounded-lg text-sm font-medium flex items-center gap-2 transition-colors whitespace-nowrap ${activeTab === 'preview' ? 'bg-ossium-accent/20 text-ossium-accent' : 'text-ossium-muted hover:text-white hover:bg-white/5'}`}
+                >
+                  <FiFileText /> Preview
                 </button>
                 <button 
                   onClick={() => setActiveTab('links')}
@@ -341,6 +388,35 @@ const Notes = () => {
                   placeholder="Write something... Use Markdown, paste commands, or generic text."
                   className="flex-1 w-full h-full min-h-[300px] bg-transparent text-gray-300 font-mono text-sm leading-relaxed resize-none focus:outline-none"
                 />
+              )}
+
+              {activeTab === 'preview' && (
+                <div className="flex-1 bg-transparent text-gray-300 text-sm leading-relaxed overflow-y-auto pr-2 prose prose-invert prose-p:my-2 prose-pre:bg-[#1e1e1e] max-w-none">
+                  <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    components={{
+                      code({node, inline, className, children, ...props}) {
+                        const match = /language-(\w+)/.exec(className || '')
+                        return !inline && match ? (
+                          <SyntaxHighlighter
+                            style={vscDarkPlus}
+                            language={match[1]}
+                            PreTag="div"
+                            {...props}
+                          >
+                            {String(children).replace(/\n$/, '')}
+                          </SyntaxHighlighter>
+                        ) : (
+                          <code className="bg-white/10 rounded px-1.5 py-0.5 font-mono text-ossium-accent" {...props}>
+                            {children}
+                          </code>
+                        )
+                      }
+                    }}
+                  >
+                    {editContent || '*Nothing to preview.*'}
+                  </ReactMarkdown>
+                </div>
               )}
 
               {activeTab === 'links' && (

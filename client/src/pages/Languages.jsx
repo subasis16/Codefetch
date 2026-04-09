@@ -118,6 +118,11 @@ const Languages = () => {
                     <p className="text-xs text-ossium-muted">{item.expert_tip}</p>
                   </div>
                 </div>
+
+                <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-ossium-accent group-hover:text-white transition-colors duration-300">
+                  <span className="text-sm font-medium">View Guide & Notes</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg>
+                </div>
               </div>
             </Link>
           ))}

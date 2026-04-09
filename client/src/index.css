@@ -37,6 +37,22 @@
   opacity: 0.5;
 }
 
+/* New Grid Background for Hero */
+@keyframes grid-pan {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 80px; }
+}
+
+.bg-grid-pattern {
+  background-size: 80px 80px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+  animation: grid-pan 4s linear infinite;
+}
+
 /* Fluid Gradient Animation - Visible Colors */
 .bg-fluid-aurora {
   background: radial-gradient(circle at 50% 50%, rgba(249, 250, 251, 0.15), transparent 60%),

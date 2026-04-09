@@ -123,15 +123,10 @@ const Setup = () => {
       <Navbar />
       <div className="pt-24 pb-20 px-6 md:px-12 flex-1 max-w-7xl mx-auto w-full">
 
-        <div className="mb-12">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="p-3 bg-ossium-accent/10 rounded-xl border border-ossium-accent/20 text-ossium-accent">
-              <FiCommand size={24} />
-            </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
-              Setup <span className="text-ossium-accent">Guides</span>
-            </h1>
-          </div>
+        <div className="mb-16 text-center flex flex-col items-center">
+          <h1 className="text-4xl md:text-6xl font-black text-white tracking-tight mb-4">
+            Setup <span className="text-ossium-accent">Guides</span>
+          </h1>
           <p className="text-ossium-muted text-lg max-w-2xl leading-relaxed">
             Essential configuration guides for modern development stacks.
             From authentication and payments to server environments and styling.

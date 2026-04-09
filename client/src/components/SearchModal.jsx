@@ -6,14 +6,12 @@ import {
   FiLayout, 
   FiServer, 
   FiCpu, 
-  FiGitBranch, 
   FiTerminal, 
   FiArrowRight,
   FiBox,
   FiMap,
   FiSettings,
   FiInfo,
-  FiCommand,
   FiX
 } from 'react-icons/fi';
 
@@ -62,13 +60,13 @@ const SearchModal = ({ isOpen, onClose }) => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [onClose, filteredResults, activeIndex]);
 
-  if (!isOpen) return null;
-
   const handleNavigate = (path) => {
     navigate(path);
     setQuery('');
     onClose();
   };
+
+  if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 z-[110] flex items-start justify-center pt-[15vh] px-4 sm:px-6">
@@ -164,7 +162,6 @@ const SearchModal = ({ isOpen, onClose }) => {
           )}
         </div>
 
-        {/* Premium Footer */}
         <div className="px-6 py-4 bg-white/[0.02] border-t border-white/5 flex flex-wrap items-center justify-between gap-4">
           <div className="hidden sm:flex items-center gap-6">
             <div className="flex items-center gap-2 text-[10px] font-bold text-white/30 uppercase tracking-tighter">
@@ -178,14 +175,6 @@ const SearchModal = ({ isOpen, onClose }) => {
               <kbd className="min-w-[20px] h-5 flex items-center justify-center bg-white/10 rounded border border-white/10 pt-0.5 font-mono">↵</kbd>
               <span>Select</span>
             </div>
-          </div>
-          
-          <div className="flex items-center justify-between w-full sm:w-auto gap-2 text-[10px] font-bold text-white/20 uppercase tracking-widest">
-            <div className="flex items-center gap-2">
-              <FiCommand size={10} />
-              <span>Search Tool</span>
-            </div>
-            <span className="sm:hidden text-white/10">v2.0</span>
           </div>
         </div>
       </div>

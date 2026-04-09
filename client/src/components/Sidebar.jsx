@@ -14,7 +14,7 @@ const Sidebar = ({ activeTab, onTabChange, isOpen, onClose }) => {
 
   const menuItems = [
     { id: 'dashboard', label: 'Dashboard', icon: <FiGrid size={20} />, path: '/dashboard' },
-    { id: 'snippets', label: 'My Snippets', icon: <FiCode size={20} /> },
+    { id: 'notes', label: 'My Notes', icon: <FiCode size={20} /> },
     { id: 'docs', label: 'Documentation', icon: <FiBook size={20} /> },
   ];
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import SearchModal from './components/SearchModal';
 const Home = React.lazy(() => import('./pages/Home'));
 const Dashboard = React.lazy(() => import('./pages/Dashboard'));
@@ -31,37 +32,39 @@ const GlobalSearch = () => {
 
 function App() {
   return (
-    <Router>
-      <AuthProvider>
-        <SearchProvider>
-          <ScrollToTop />
-          <GlobalSearch />
-          <div className="min-h-screen bg-ossium-darker text-white overflow-x-hidden selection:bg-ossium-accent selection:text-ossium-darker font-sans">
-            <React.Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-ossium-darker text-white"><div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-ossium-accent"></div></div>}>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/cheatsheets" element={<CheatSheets />} />
-                <Route path="/cheatsheets/:id" element={<CheatSheetDetail />} />
-                <Route path="/languages" element={<Languages />} />
-                <Route path="/languages/:id" element={<LanguageNotes />} />
-                <Route path="/errors" element={<Errors />} />
-                <Route path="/tools" element={<Tools />} />
-                <Route path="/fundamentals" element={<Fundamentals />} />
-                <Route path="/roadmap" element={<Roadmap />} />
-                <Route path="/ai" element={<AIWorkflow />} />
-                <Route path="/setup" element={<Setup />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/privacy" element={<PrivacyPolicy />} />
-                <Route path="/terms" element={<TermsOfService />} />
-                <Route path="/reset-password" element={<ResetPassword />} />
-              </Routes>
-            </React.Suspense>
-          </div>
-        </SearchProvider>
-      </AuthProvider>
-    </Router>
+    <HelmetProvider>
+      <Router>
+        <AuthProvider>
+          <SearchProvider>
+            <ScrollToTop />
+            <GlobalSearch />
+            <div className="min-h-screen bg-ossium-darker text-white overflow-x-hidden selection:bg-ossium-accent selection:text-ossium-darker font-sans">
+              <React.Suspense fallback={<div className="min-h-screen bg-ossium-darker"></div>}>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/dashboard" element={<Dashboard />} />
+                  <Route path="/cheatsheets" element={<CheatSheets />} />
+                  <Route path="/cheatsheets/:id" element={<CheatSheetDetail />} />
+                  <Route path="/languages" element={<Languages />} />
+                  <Route path="/languages/:id" element={<LanguageNotes />} />
+                  <Route path="/errors" element={<Errors />} />
+                  <Route path="/tools" element={<Tools />} />
+                  <Route path="/fundamentals" element={<Fundamentals />} />
+                  <Route path="/roadmap" element={<Roadmap />} />
+                  <Route path="/ai" element={<AIWorkflow />} />
+                  <Route path="/setup" element={<Setup />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/privacy" element={<PrivacyPolicy />} />
+                  <Route path="/terms" element={<TermsOfService />} />
+                  <Route path="/reset-password" element={<ResetPassword />} />
+                </Routes>
+              </React.Suspense>
+            </div>
+          </SearchProvider>
+        </AuthProvider>
+      </Router>
+    </HelmetProvider>
   );
 }
 

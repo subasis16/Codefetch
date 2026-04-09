@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import SEO from '../components/SEO';
 
 const CheatSheetDetail = () => {
   const { id } = useParams();
@@ -1693,6 +1694,7 @@ const CheatSheetDetail = () => {
 
   return (
     <div className="min-h-screen bg-ossium-darker text-white font-sans flex flex-col">
+      <SEO title={cheatSheetData.title} description={cheatSheetData.desc} />
       <Navbar />
 
       <main className="flex-1 pt-24 px-6 pb-20 max-w-5xl mx-auto w-full">
