@@ -29,8 +29,8 @@ const Navbar = () => {
     <nav
       className={`fixed z-50 left-1/2 -translate-x-1/2 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] flex items-center justify-between font-black tracking-widest
         ${scrolled
-          ? 'top-4 w-[95%] max-w-6xl h-14 bg-white/10 backdrop-blur-xl rounded-full px-8 border border-white/10 shadow-[0_20px_40px_rgba(0,0,0,0.3)]'
-          : 'top-0 w-full h-20 bg-transparent px-6 md:px-12 border-transparent rounded-none'
+          ? 'top-4 w-[95%] max-w-6xl h-14 bg-white/10 backdrop-blur-xl rounded-full px-4 sm:px-8 border border-white/10 shadow-[0_20px_40px_rgba(0,0,0,0.3)]'
+          : 'top-0 w-full h-20 bg-transparent px-4 sm:px-6 md:px-12 border-transparent rounded-none'
         }`}
     >
       <Link to="/" className="flex items-center cursor-pointer shrink-0">
@@ -65,7 +65,7 @@ const Navbar = () => {
             to={user ? "/dashboard" : "/login"}
             state={user ? { tab: 'notes' } : {}}
             className={`bg-white text-black rounded-full font-black uppercase tracking-[0.2em] hover:bg-gray-200 transition-all shadow-xl flex items-center justify-center
-              ${scrolled ? 'px-4 py-1.5 text-[8px]' : 'px-6 py-2 text-[9px]'}
+              ${scrolled ? 'px-3 py-1.5 text-[8px]' : 'px-5 py-2 text-[9px]'}
             `}
           >
             {user ? "My Notes" : "Login"}

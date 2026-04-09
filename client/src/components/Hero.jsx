@@ -3,15 +3,15 @@ import { Link } from 'react-router-dom';
 
 const Hero = () => {
   return (
-    <section className="relative min-h-[100svh] flex flex-col items-center justify-center pt-24 pb-8 sm:pb-12 px-4 sm:px-6 bg-[#050505] overflow-hidden">
+    <section className="relative min-h-[min(100vh,800px)] pt-32 pb-8 flex flex-col items-center justify-center px-4 sm:px-6 bg-[#050505] overflow-hidden">
       {/* Subtle Grid Pattern */}
       <div className="absolute inset-0 bg-grid-pattern z-0 pointer-events-none opacity-80"></div>
 
       {/* Premium Spotlight Effect */}
-      <div className="absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-white/5 blur-[150px] rounded-[100%] pointer-events-none z-0"></div>
+      <div className="absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[800px] h-[600px] bg-white/5 blur-[150px] rounded-[100%] pointer-events-none z-0"></div>
 
       {/* Dark Vignette Overlay */}
-      <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,_transparent_0%,_#050505_100%)] opacity-80 z-0"></div>
+      <div className="absolute inset-0 pointer-events-none vignette-overlay opacity-90 z-0"></div>
 
       <div className="relative z-10 w-full max-w-5xl mx-auto text-center flex flex-col items-center animate-fade-in-up mt-8 sm:mt-16 pb-10">
 
@@ -46,7 +46,7 @@ const Hero = () => {
       </div>
 
       {/* Tech Stack Ticker */}
-      <div className="relative z-10 mt-16 sm:mt-auto pt-8 sm:pt-16 pb-0 sm:pb-4 w-full max-w-5xl">
+      <div className="relative z-10 mt-16 sm:mt-auto pt-8 w-full max-w-5xl">
         <p className="text-xs text-ossium-muted text-center mb-8 uppercase tracking-[0.3em] font-semibold">
           Powering developers working with
         </p>

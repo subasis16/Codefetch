@@ -38,8 +38,8 @@ function App() {
           <SearchProvider>
             <ScrollToTop />
             <GlobalSearch />
-            <div className="min-h-screen bg-ossium-darker text-white overflow-x-hidden selection:bg-ossium-accent selection:text-ossium-darker font-sans">
-              <React.Suspense fallback={<div className="min-h-screen bg-ossium-darker"></div>}>
+            <div className="min-h-screen bg-ossium-darker text-white w-full max-w-[100vw] overflow-x-hidden selection:bg-ossium-accent selection:text-ossium-darker font-sans">
+              <React.Suspense fallback={<div className="min-h-screen bg-ossium-darker w-full h-full"></div>}>
                 <Routes>
                   <Route path="/" element={<Home />} />
                   <Route path="/login" element={<Login />} />
