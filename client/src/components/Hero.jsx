@@ -46,7 +46,7 @@ const Hero = () => {
       </div>
 
       {/* Tech Stack Ticker */}
-      <div className="relative z-10 mt-16 sm:mt-auto pt-8 sm:pt-16 pb-8 w-full max-w-5xl">
+      <div className="relative z-10 mt-16 sm:mt-auto pt-8 sm:pt-16 pb-0 sm:pb-4 w-full max-w-5xl">
         <p className="text-xs text-ossium-muted text-center mb-8 uppercase tracking-[0.3em] font-semibold">
           Powering developers working with
         </p>

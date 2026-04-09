@@ -13,7 +13,7 @@ const categories = [
 
 const CategoryCards = () => {
   return (
-    <section className="py-16 sm:py-24 px-4 sm:px-6 relative z-10">
+    <section className="pt-8 pb-16 sm:pt-16 sm:pb-24 px-4 sm:px-6 relative z-10">
       <div className="max-w-7xl mx-auto">
         <div className="mb-8 sm:mb-12 flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div>
