@@ -43,13 +43,13 @@ const Languages = () => {
             <FiSearch className="absolute left-5 top-1/2 -translate-y-1/2 text-ossium-muted group-focus-within:text-ossium-accent transition-colors" size={20} />
           </div>
 
-          <div className="mt-8 flex sm:flex-wrap sm:justify-center gap-3 overflow-x-auto sm:overflow-x-visible pb-4 sm:pb-0 scrollbar-hide">
+          <div className="mt-8 flex sm:flex-wrap sm:justify-center gap-3 overflow-x-auto sm:overflow-x-visible pb-6 px-1 sm:pb-0 scrollbar-hide">
             {types.map((type) => (
               <button
                 key={type}
                 onClick={() => setSelectedType(type)}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${selectedType === type
-                  ? 'bg-ossium-accent text-ossium-darker font-bold shadow-[0_0_10px_rgba(202,255,51,0.3)] whitespace-nowrap shrink-0'
+                  ? 'bg-ossium-accent text-ossium-darker font-bold shadow-[0_0_10px_rgba(202,255,51,0.3)] whitespace-nowrap shrink-0 sm:scale-105 z-10'
                   : 'bg-[#121212] border border-white/5 text-ossium-muted hover:text-white hover:border-white/10 hover:bg-white/5 whitespace-nowrap shrink-0'
                   }`}
               >

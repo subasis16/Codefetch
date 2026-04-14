@@ -106,10 +106,10 @@ const Documentation = () => {
 
           {/* Global CTA */}
           <div className="max-w-6xl mx-auto mt-40 px-6">
-            <div className="relative py-6 sm:py-8 px-10 sm:px-14 rounded-[1.5rem] bg-white text-black overflow-hidden group border border-white/10 shadow-2xl">
-              <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-8">
+            <div className="relative p-8 sm:py-8 sm:px-14 rounded-[1.5rem] bg-white text-black overflow-hidden group border border-white/10 shadow-2xl">
+              <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6 sm:gap-8">
                 <div>
-                  <h3 className="text-3xl sm:text-4xl font-black tracking-tighter leading-none mb-4">
+                  <h3 className="text-3xl sm:text-4xl font-black tracking-tighter leading-tight mb-4">
                     NEED MORE TOOLS?
                   </h3>
                   <p className="text-black/60 font-bold text-sm sm:text-base">
@@ -118,10 +118,10 @@ const Documentation = () => {
                 </div>
                 <a 
                   href="/tools" 
-                  className="inline-flex items-center gap-4 px-10 py-5 bg-black text-white rounded-full font-black uppercase tracking-widest text-sm hover:scale-105 transition-all shadow-2xl shrink-0"
+                  className="inline-flex items-center justify-center gap-3 px-6 py-4 sm:px-10 sm:py-5 bg-black text-white rounded-full font-black uppercase tracking-widest text-[10px] sm:text-sm hover:scale-105 transition-all shadow-2xl w-full sm:w-auto text-center shrink-0"
                 >
                   Explore Developer Tools
-                  <FiArrowRight />
+                  <FiArrowRight size={16} className="shrink-0" />
                 </a>
               </div>
               {/* Background Decoration */}

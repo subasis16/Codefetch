@@ -18,10 +18,10 @@ const Fundamentals = () => {
     <div className="min-h-screen bg-black text-white font-sans flex flex-col selection:bg-white selection:text-black">
       <Navbar />
 
-      <main className="flex-1 pt-32 px-6 pb-32">
+      <main className="flex-1 pt-32 px-4 sm:px-6 pb-32">
         {/* Hero Section */}
         <div className="max-w-4xl mx-auto mb-24 text-center">
-          <h1 className="text-5xl md:text-7xl font-black mb-8 tracking-tighter leading-[0.9]">
+          <h1 className="text-4xl md:text-7xl font-black mb-8 tracking-tighter leading-[0.9]">
             PROGRAMMING <br />
             <span className="text-white/20">FUNDAMENTALS</span>
           </h1>
@@ -31,16 +31,16 @@ const Fundamentals = () => {
         </div>
 
         {/* Tabs Navigation (Pills format) */}
-        <div className="max-w-[1400px] mx-auto mb-16 px-6">
-          <div className="flex sm:flex-wrap sm:justify-center gap-3 overflow-x-auto sm:overflow-x-visible pb-4 sm:pb-0 scrollbar-hide">
+        <div className="max-w-[1400px] mx-auto mb-16">
+          <div className="flex sm:flex-wrap sm:justify-center gap-3 overflow-x-auto sm:overflow-x-visible pb-6 px-1 sm:pb-0 scrollbar-hide">
             {fundamentalsData.map((section) => (
               <button
                 key={section.id}
                 onClick={() => setActiveSection(section.id)}
-                className={`px-6 py-3 rounded-full text-xs font-black uppercase tracking-widest transition-all duration-300 border whitespace-nowrap shrink-0 ${
+                className={`px-4 py-2 sm:px-6 sm:py-3 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-widest transition-all duration-300 border whitespace-nowrap shrink-0 ${
                   activeSection === section.id
-                    ? 'bg-white text-black border-white shadow-[0_0_30px_rgba(255,255,255,0.3)] scale-105'
-                    : 'bg-[#111] text-white/50 border-white/5 hover:border-white/20 hover:text-white hover:bg-white/10'
+                    ? 'bg-white text-black border-white shadow-[0_0_20px_rgba(255,255,255,0.25)] sm:scale-105 z-10'
+                    : 'bg-[#111] text-white/70 border-white/5 hover:border-white/20 hover:text-white hover:bg-white/10'
                 }`}
               >
                 {section.title}
@@ -50,18 +50,13 @@ const Fundamentals = () => {
         </div>
 
         {/* Content Section for Active Tab */}
-        <div className="max-w-4xl mx-auto relative px-4 sm:px-0 animate-fade-in-down" key={activeSection}>
+        <div className="max-w-4xl mx-auto relative animate-fade-in-down" key={activeSection}>
 
           <div className="space-y-32">
             <div className="relative group">
                 
                 {/* Section Header */}
-                <div className="flex items-start gap-6 sm:gap-10 mb-12">
-                  <div className="relative z-10 w-12 h-12 sm:w-16 sm:h-16 shrink-0 flex items-center justify-center rounded-2xl border transition-all duration-500 font-mono text-sm sm:text-lg font-black tracking-tighter shadow-2xl bg-white text-black border-white scale-110">
-                    {fundamentalsData.findIndex(s => s.id === activeSection) + 1}
-                    <div className="absolute inset-0 rounded-2xl bg-white/20 blur-xl animate-pulse" />
-                  </div>
-                  
+                <div className="mb-12">
                   <div className="pt-2">
                     <h2 className="text-3xl sm:text-5xl font-black tracking-tighter mb-4 transition-all duration-500 text-white translate-x-1">
                       {activeData.title}
@@ -73,7 +68,7 @@ const Fundamentals = () => {
                 </div>
 
                 {/* Sub-items list */}
-                <div className="pl-[68px] sm:pl-[106px] space-y-20">
+                <div className="space-y-20">
                   {activeData.items.map((item, iIdx) => (
                     <div key={iIdx} className="relative group/item">
                       <div className="mb-6">
@@ -94,7 +89,7 @@ const Fundamentals = () => {
                             <div className="w-2.5 h-2.5 rounded-full bg-white/5" />
                             <div className="w-2.5 h-2.5 rounded-full bg-white/5" />
                           </div>
-                          <div className="flex items-center gap-2 px-3 py-1 rounded bg-white/5 border border-white/5 text-[9px] font-black uppercase tracking-widest text-white/30">
+                          <div className="hidden sm:flex items-center gap-2 px-3 py-1 rounded bg-white/5 border border-white/5 text-[9px] font-black uppercase tracking-widest text-white/30">
                             <FiCode size={10} />
                             <span>Snippet</span>
                           </div>

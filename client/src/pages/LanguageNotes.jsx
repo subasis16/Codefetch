@@ -93,15 +93,15 @@ const LanguageNotes = () => {
         {/* Tabs Navigation (Pills format) */}
         {filteredNotes.length > 0 && (
           <div className="max-w-[1400px] mx-auto mb-16 px-4">
-            <div className="flex sm:flex-wrap sm:justify-center gap-3 overflow-x-auto sm:overflow-x-visible pb-4 sm:pb-0 scrollbar-hide">
+            <div className="flex sm:flex-wrap sm:justify-center gap-3 overflow-x-auto sm:overflow-x-visible pb-6 px-1 sm:pb-0 scrollbar-hide">
               {filteredNotes.map((note) => (
                 <button
                   key={note.title}
                   onClick={() => setActiveNoteTitle(note.title)}
                   className={`px-5 py-2.5 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-widest transition-all duration-300 border whitespace-nowrap shrink-0 ${
                     activeNoteTitle === note.title
-                      ? 'bg-white text-black border-white shadow-[0_0_30px_rgba(255,255,255,0.3)] scale-105'
-                      : 'bg-[#111] text-white/50 border-white/5 hover:border-white/20 hover:text-white hover:bg-white/10'
+                      ? 'bg-white text-black border-white shadow-[0_0_20px_rgba(255,255,255,0.25)] sm:scale-105 z-10'
+                      : 'bg-[#111] text-white/70 border-white/5 hover:border-white/20 hover:text-white hover:bg-white/10'
                   }`}
                 >
                   {note.title}
@@ -115,14 +115,7 @@ const LanguageNotes = () => {
         {activeNote ? (
           <div className="relative animate-fade-in-down" key={activeNote.title}>
             <div className="relative group">
-              <div className="flex items-start gap-4 sm:gap-10">
-                {/* Timeline Number block */}
-                <div className="relative z-10 w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-white border border-white flex items-center justify-center font-mono font-black text-sm sm:text-lg text-black shrink-0 scale-110 shadow-2xl">
-                  {filteredNotes.indexOf(activeNote) + 1}
-                  <div className="absolute inset-0 rounded-2xl bg-white/20 blur-xl animate-pulse" />
-                </div>
-
-                <div className="flex-1 pt-2 sm:pt-4 min-w-0">
+              <div className="pt-2 sm:pt-4">
                   <h2 className="text-2xl sm:text-4xl font-black text-white mb-4 sm:mb-6 tracking-tight">
                     {activeNote.title}
                   </h2>
@@ -150,7 +143,6 @@ const LanguageNotes = () => {
                       </div>
                     </div>
                   )}
-                </div>
               </div>
             </div>
           </div>

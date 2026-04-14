@@ -9,11 +9,10 @@ const Footer = () => {
         {/* Brand */}
         <div className="col-span-2 md:col-span-2">
           <Link to="/" className="flex items-center gap-2 mb-6 w-max">
-
-            <span className="text-white font-bold text-lg">CodeFetch</span>
+            <span className="text-white font-black text-xl tracking-tight">CODEFETCH</span>
           </Link>
           <p className="text-ossium-muted max-w-sm mb-6">
-            The developer companion. Recall syntax, patterns, and docs in seconds. Built for the modern web.
+            The architectural companion for developers. Master syntax, system design, and engineering patterns in seconds.
           </p>
           <div className="flex gap-4">
             <a href="https://github.com/subasis16" target="_blank" rel="noopener noreferrer" className="text-white hover:text-ossium-accent transition-colors text-sm font-medium">GitHub</a>
@@ -25,10 +24,11 @@ const Footer = () => {
         <div>
           <h4 className="text-white font-bold mb-6">Platform</h4>
           <ul className="space-y-4 text-sm text-ossium-muted">
-            <li><Link to="/cheatsheets" className="hover:text-white transition-colors">Cheat Sheets</Link></li>
-            <li><Link to="/languages" className="hover:text-white transition-colors">Languages</Link></li>
-            <li><Link to="/roadmap" className="hover:text-white transition-colors">Project Blueprints</Link></li>
-            <li><Link to="/errors" className="hover:text-white transition-colors">Bugs & Fixes</Link></li>
+            <li><Link to="/fundamentals" className="hover:text-white transition-colors">Fundamentals</Link></li>
+            <li><Link to="/languages" className="hover:text-white transition-colors">Language Notes</Link></li>
+            <li><Link to="/system-design" className="hover:text-white transition-colors">System Design</Link></li>
+            <li><Link to="/documentation" className="hover:text-white transition-colors">Documentation</Link></li>
+            <li><Link to="/dashboard" className="hover:text-white transition-colors">My Notes</Link></li>
           </ul>
         </div>
 
@@ -36,10 +36,11 @@ const Footer = () => {
         <div>
           <h4 className="text-white font-bold mb-6">Resources</h4>
           <ul className="space-y-4 text-sm text-ossium-muted">
-            <li><Link to="/ai" className="hover:text-white transition-colors">AI Workflows</Link></li>
+            <li><Link to="/cheatsheets" className="hover:text-white transition-colors">Cheat Sheets</Link></li>
+            <li><Link to="/ai" className="hover:text-white transition-colors">AI Engineering</Link></li>
+            <li><Link to="/errors" className="hover:text-white transition-colors">Bugs & Fixes</Link></li>
             <li><Link to="/tools" className="hover:text-white transition-colors">Developer Tools</Link></li>
-            <li><Link to="/dashboard" className="hover:text-white transition-colors">Dashboard</Link></li>
-            <li><a href="https://github.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Contribute</a></li>
+            <li><Link to="/setup" className="hover:text-white transition-colors">Setup Guides</Link></li>
           </ul>
         </div>
       </div>

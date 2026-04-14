@@ -112,7 +112,7 @@ const BuilderFlow = ({ initialNodesProp, initialEdgesProp, minimal }) => {
     { 
       id: 'dummy-offset-left', 
       type: 'default', 
-      position: { x: -300, y: 0 }, 
+      position: { x: typeof window !== 'undefined' && window.innerWidth < 1024 ? 0 : -300, y: 0 }, 
       data: { label: '' }, 
       style: { opacity: 0, pointerEvents: 'none', width: 1, height: 1 } 
     }
@@ -161,7 +161,7 @@ const BuilderFlow = ({ initialNodesProp, initialEdgesProp, minimal }) => {
   );
 
   return (
-    <div className={`${minimal ? 'h-[400px] bg-transparent border-0' : 'h-[800px] bg-[#050505] shadow-2xl'} w-full overflow-hidden relative flex`}>
+    <div className={`${minimal ? 'h-[400px] bg-transparent border-0' : 'h-[700px] lg:h-[800px] bg-[#050505] lg:shadow-2xl'} w-full overflow-hidden relative flex`}>
       
       {/* Main Flow Canvas - Now takes full area without sidebar */}
       <div className="flex-1 h-full relative" ref={reactFlowWrapper} onDrop={onDrop} onDragOver={onDragOver}>
@@ -178,14 +178,14 @@ const BuilderFlow = ({ initialNodesProp, initialEdgesProp, minimal }) => {
           onConnect={onConnect}
           nodeTypes={nodeTypes}
           fitView
-          fitViewOptions={{ maxZoom: 1.1 }}
-          minZoom={1.1}
-          maxZoom={1.1}
-          zoomOnScroll={false}
-          zoomOnPinch={false}
-          zoomOnDoubleClick={false}
+          fitViewOptions={{ padding: 0.1, maxZoom: 1.1 }}
+          minZoom={0.4}
+          maxZoom={1.2}
+          zoomOnScroll={!minimal}
+          zoomOnPinch={!minimal}
+          zoomOnDoubleClick={!minimal}
           nodesDraggable={true}
-          panOnDrag={false}
+          panOnDrag={!minimal}
           preventScrolling={false}
           proOptions={{ hideAttribution: true }} 
         >

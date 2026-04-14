@@ -55,15 +55,15 @@ const SystemDesign = () => {
 
         {/* Tabs Navigation (Pills format) */}
         <div className="max-w-5xl mx-auto mb-16 px-6" id="content-area">
-          <div className="flex flex-wrap justify-center gap-3">
+          <div className="flex sm:flex-wrap sm:justify-center gap-3 overflow-x-auto sm:overflow-x-visible pb-6 px-1 sm:pb-0 scrollbar-hide">
             {systemDesignData.map((section) => (
               <button
                 key={section.id}
                 onClick={() => handleSectionChange(section.id)}
-                className={`px-6 py-3 rounded-full text-xs font-black uppercase tracking-widest transition-all duration-300 border ${
+                className={`px-4 py-2 sm:px-6 sm:py-3 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-widest transition-all duration-300 border whitespace-nowrap shrink-0 ${
                   activeSection === section.id
-                    ? 'bg-white text-black border-white shadow-[0_0_30px_rgba(255,255,255,0.3)] scale-105'
-                    : 'bg-[#111] text-white/50 border-white/5 hover:border-white/20 hover:text-white hover:bg-white/10'
+                    ? 'bg-white text-black border-white shadow-[0_0_20px_rgba(255,255,255,0.25)] sm:scale-105 z-10'
+                    : 'bg-[#111] text-white/70 border-white/5 hover:border-white/20 hover:text-white hover:bg-white/10'
                 }`}
               >
                 {section.title}
@@ -74,7 +74,7 @@ const SystemDesign = () => {
 
         {/* Dashboard Full Canvas View Component - Expanded to Full Width */}
         <div className="w-full mt-8 mb-24 animate-fade-in-down" key={activeData.id}>
-          <div className="relative w-full h-[800px] group bg-[#050505] border-y border-white/5 overflow-hidden shadow-2xl">
+          <div className="flex flex-col-reverse lg:block relative w-full group bg-[#050505] border-y border-white/5 overflow-hidden shadow-2xl lg:h-[800px]">
             
             {/* Main Interactive Canvas */}
             <ArchitectureBuilder 
@@ -84,8 +84,7 @@ const SystemDesign = () => {
               minimal={false} 
             />
 
-            {/* Floating Content Overlay (Left Corner) - Adjusted positioning slightly for edge alignment */}
-            <div className="absolute top-8 left-8 bottom-8 w-full max-w-[340px] sm:max-w-[380px] bg-[#0a0a0ae6] backdrop-blur-xl border border-white/10 rounded-2xl flex flex-col z-20 shadow-2xl overflow-hidden">
+            <div className="relative lg:absolute lg:top-8 lg:left-8 lg:bottom-8 w-full lg:max-w-[380px] bg-[#0a0a0a] lg:bg-[#0a0a0ae6] backdrop-blur-xl border-b lg:border border-white/10 lg:rounded-2xl flex flex-col z-20 shadow-2xl overflow-hidden h-[400px] lg:h-auto">
               
               {/* Section Header */}
               <div className="p-6 border-b border-white/5 shrink-0 bg-gradient-to-br from-white/[0.05] to-transparent">
@@ -161,22 +160,22 @@ const SystemDesign = () => {
 
         {/* Global CTA */}
         <div className="max-w-6xl mx-auto mt-40 px-6">
-          <div className="relative py-6 sm:py-8 px-10 sm:px-14 rounded-[1.5rem] bg-white text-black overflow-hidden group border border-white/10 shadow-2xl">
-            <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-8">
+          <div className="relative p-8 sm:py-8 sm:px-14 rounded-[1.5rem] bg-white text-black overflow-hidden group border border-white/10 shadow-2xl">
+            <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6 sm:gap-8">
               <div>
-                <h3 className="text-3xl sm:text-4xl font-black tracking-tighter leading-none mb-4">
+                <h3 className="text-3xl sm:text-4xl font-black tracking-tighter leading-tight mb-4">
                   READY FOR SCALE?
                 </h3>
                 <p className="text-black/60 font-bold text-sm sm:text-base">
-                  Apply these design patterns <br /> in your next distributed project.
+                  Apply these design patterns <br className="hidden sm:block" /> in your next distributed project.
                 </p>
               </div>
               <a 
                 href="/roadmap" 
-                className="inline-flex items-center gap-4 px-10 py-5 bg-black text-white rounded-full font-black uppercase tracking-widest text-sm hover:scale-105 transition-all shadow-2xl"
+                className="inline-flex items-center justify-center gap-3 px-6 py-4 sm:px-10 sm:py-5 bg-black text-white rounded-full font-black uppercase tracking-widest text-[10px] sm:text-sm hover:scale-105 transition-all shadow-2xl w-full sm:w-auto text-center shrink-0"
               >
                 View Architecture Blueprints
-                <FiArrowRight />
+                <FiArrowRight size={16} className="shrink-0" />
               </a>
             </div>
             {/* Background Decoration */}
