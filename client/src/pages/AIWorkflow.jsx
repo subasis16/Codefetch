@@ -135,14 +135,14 @@ const AIWorkflow = () => {
     <div className="min-h-screen bg-ossium-darker text-white font-sans flex flex-col selection:bg-ossium-accent selection:text-black">
       <Navbar />
 
-      <main className="flex-1 pt-32 px-6 pb-32 max-w-4xl mx-auto w-full">
+      <main className="flex-1 pt-32 px-6 pb-32 max-w-[1400px] mx-auto w-full">
         
         {/* Header Section */}
         <div className="mb-24 animate-fade-in-up">
-          <h1 className="text-4xl md:text-5xl font-black text-white uppercase tracking-tight mb-6">
+          <h1 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tight mb-6">
             AI ENGINEERING
           </h1>
-          <p className="text-ossium-muted text-sm font-light leading-relaxed max-w-2xl mb-8">
+          <p className="text-ossium-muted text-sm font-light leading-relaxed max-w-3xl mb-8">
             Strategic prompt engineering framework and essential templates for modern developers working with:
           </p>
           
@@ -176,7 +176,7 @@ const AIWorkflow = () => {
             <div className="space-y-12">
               {aiWorkflowData.promptFormat.map((item, idx) => (
                 <div key={idx} className="flex flex-col md:flex-row gap-6 md:gap-12 items-start group/code">
-                  <div className="md:w-1/3">
+                  <div className="md:w-1/4">
                     <h4 className="text-xs font-bold text-white tracking-widest uppercase mb-2">
                       <span className="text-ossium-accent mr-3">{String(idx + 1).padStart(2, '0')}</span>
                       {item.step}
@@ -201,12 +201,12 @@ const AIWorkflow = () => {
               <p className="text-ossium-muted text-xs">Ready-to-use structures for common development tasks.</p>
             </div>
             
-            <div className="flex flex-col gap-16">
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-x-12 gap-y-16">
               {aiWorkflowData.prompts.map((item, idx) => (
-                <div key={idx} className="flex flex-col lg:flex-row gap-6 lg:gap-12 items-start pb-16 border-b border-white/5 last:border-0 last:pb-0">
-                  <div className="lg:w-1/3">
+                <div key={idx} className="flex flex-col gap-6 items-start pb-16 border-b border-white/5 xl:border-b-0 xl:pb-0">
+                  <div className="w-full">
                     <h3 className="text-xs font-bold text-white tracking-widest uppercase mb-3">{item.title}</h3>
-                    <p className="text-white/40 text-[11px] leading-relaxed">{item.desc}</p>
+                    <p className="text-white/40 text-[11px] leading-relaxed mb-4">{item.desc}</p>
                   </div>
                   <div className="flex-1 w-full relative group/code bg-[#0a0a0a] border border-white/10 rounded-lg p-5">
                     <CopyButton text={item.code} />

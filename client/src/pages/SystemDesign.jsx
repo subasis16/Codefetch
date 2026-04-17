@@ -4,7 +4,7 @@ import Footer from '../components/Footer';
 import { useLocation } from 'react-router-dom';
 import { systemDesignData } from '../data/systemDesign';
 import { FiArrowRight, FiServer, FiLayers } from 'react-icons/fi';
-import ArchitectureBuilder, { nodeConfig } from '../components/ArchitectureBuilder';
+import ArchitectureBuilder from '../components/ArchitectureBuilder';
 
 const SystemDesign = () => {
   const { hash } = useLocation();
@@ -74,7 +74,7 @@ const SystemDesign = () => {
 
         {/* Dashboard Full Canvas View Component - Expanded to Full Width */}
         <div className="w-full mt-8 mb-24 animate-fade-in-down" key={activeData.id}>
-          <div className="flex flex-col-reverse lg:block relative w-full group bg-[#050505] border-y border-white/5 overflow-hidden shadow-2xl lg:h-[800px]">
+          <div className="flex flex-col-reverse lg:block relative w-full group bg-[#050505] overflow-hidden shadow-2xl lg:h-[800px]">
             
             {/* Main Interactive Canvas */}
             <ArchitectureBuilder 
@@ -84,7 +84,7 @@ const SystemDesign = () => {
               minimal={false} 
             />
 
-            <div className="relative lg:absolute lg:top-8 lg:left-8 lg:bottom-8 w-full lg:max-w-[380px] bg-[#0a0a0a] lg:bg-[#0a0a0ae6] backdrop-blur-xl border-b lg:border border-white/10 lg:rounded-2xl flex flex-col z-20 shadow-2xl overflow-hidden h-[400px] lg:h-auto">
+            <div className="relative lg:absolute lg:top-8 lg:left-8 w-full lg:max-w-[380px] bg-[#0a0a0a] lg:bg-[#0a0a0ae6] backdrop-blur-xl border-b lg:border border-white/10 lg:rounded-2xl flex flex-col z-20 shadow-2xl overflow-hidden h-[400px] lg:h-fit lg:max-h-[calc(100%-64px)]">
               
               {/* Section Header */}
               <div className="p-6 border-b border-white/5 shrink-0 bg-gradient-to-br from-white/[0.05] to-transparent">
@@ -128,35 +128,19 @@ const SystemDesign = () => {
                   );
                 })}
 
-                {/* Components Library - Integrated Toolbox (Down Part) */}
-                <div className="mt-8 pt-8 border-t border-white/10">
-                  <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-white/30 mb-4 px-2">
-                    Components Library
-                  </h3>
-                  <div className="grid grid-cols-2 gap-2 pb-4">
-                    {nodeConfig.map((config) => (
-                      <div 
-                        key={config.type}
-                        className="p-3 rounded-xl border border-white/5 bg-black/40 hover:bg-white/[0.05] hover:border-white/20 transition-all cursor-grab active:cursor-grabbing flex flex-col items-center gap-2 group/node"
-                        onDragStart={(event) => {
-                          event.dataTransfer.setData('application/reactflow', JSON.stringify({ type: config.type, bg: config.bg, color: config.color }));
-                          event.dataTransfer.effectAllowed = 'move';
-                        }}
-                        draggable
-                      >
-                        <div className={`p-2 rounded-lg ${config.bg} ${config.color} group-hover/node:scale-110 transition-transform`}>
-                          {config.icon}
-                        </div>
-                        <span className="text-[9px] font-bold text-white/50 uppercase tracking-widest">{config.type}</span>
-                      </div>
-                    ))}
+                {/* Summary / Insight section */}
+                <div className="mt-8 pt-8 border-t border-white/5 pb-4">
+                  <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-white/30 mb-4 px-2">Architectural Note</h4>
+                  <div className="p-5 rounded-2xl bg-white/[0.03] border border-white/5 relative overflow-hidden group/card text-[11px] text-white/50 leading-relaxed font-medium">
+                    {activeData.id === 'networking' 
+                      ? 'Optimizing for low latency often means trading off reliability—choose the protocol that fits the user experience.' 
+                      : 'Always design for failure. In distributed systems, anything that can go wrong, will go wrong at scale.'}
                   </div>
                 </div>
-              </div>
             </div>
-
           </div>
         </div>
+      </div>
 
         {/* Global CTA */}
         <div className="max-w-6xl mx-auto mt-40 px-6">
